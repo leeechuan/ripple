@@ -1,4 +1,4 @@
-.homepage-video{
+.layout-v1 .homepage-video{
     position: fixed;
     right: 0;
     bottom: 0;
@@ -6,7 +6,7 @@
     min-height: 100%;
 }
 
-.homepage-intro-content {
+.layout-v1 .homepage-intro-content {
     position: fixed;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
@@ -15,7 +15,7 @@
     padding: 20px;
   }
 
-  .ripple-title-logo{
+  .layout-v1 .ripple-title-logo{
     color: #F0F0EF;
     text-align: center;
     font-family: 'Quicksand', sans-serif;
@@ -26,7 +26,7 @@
     text-transform: uppercase;
   }
 
-  .navbar-header a{
+  .layout-v1 .navbar-header a{
     color: #F0F0EF;
     text-align: center;
     font-family: 'Quicksand', sans-serif;
@@ -37,15 +37,15 @@
     text-transform: uppercase;
   }
 
-  .navbar-header a:hover{
+  .layout-v1 .navbar-header a:hover{
     color: var(--primary-500)
   }
 
-  .hero-cta{
+  .layout-v1 .hero-cta{
     background-color: var(--primary-default)
   }
 
-  .hero-title{
+  .layout-v1 .hero-title{
     color: #F0F0EF;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -56,7 +56,7 @@
     text-transform: uppercase;
   }
 
-  .hero-caption{
+  .layout-v1 .hero-caption{
     color: #F0F0EF;
     text-align: center;
     font-family: 'Poppins', sans-serif;
@@ -67,6 +67,6 @@
     text-transform: uppercase;
   }
 
-  .hero-title .hero-title-highlight{
+  .layout-v1 .hero-title .hero-title-highlight{
     color: var(--primary-default);
   }

@@ -133,16 +133,17 @@
     }
   }
 
-  .background-default{
+
+  .layout-v1 .background-default{
     background-color: var(--background-default);
   }
 
-  .secondary-default-20{
+  .layout-v1 .secondary-default-20{
     color: var(--secondary-default);
     opacity: 0.2;
   }
 
-  .btn-primary{
+  .layout-v1 .btn-primary{
     border-radius: 6px;
     background: var(--primary-default);
     font-family: 'Inter', sans-serif;
@@ -152,6 +153,6 @@
     line-height: 150%; /* 24px */
   }
 
-  .btn-primary:hover{
+  .layout-v1 .btn-primary:hover{
     background: var(--primary-300);
   }

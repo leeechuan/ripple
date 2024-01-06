@@ -6,7 +6,7 @@ import Homepage from "./components/Homepage"
 
 function App() {
   return(
-      <div>
+      <div className='layout-v1'>
           <Homepage/>
       </div>
   )
