@@ -9,6 +9,16 @@ app.use(express.json());
 
 mongoose.connect("mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/?retryWrites=true&w=majority")
 
+app.use(cors(
+    {
+        origin: ["https://ripple-frontend-nine.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+))
+
+
+
 // Example for API for future use
 
 
