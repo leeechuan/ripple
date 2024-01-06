@@ -14,3 +14,59 @@
     width: 100%;
     padding: 20px;
   }
+
+  .ripple-title-logo{
+    color: #F0F0EF;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  .navbar-header a{
+    color: #F0F0EF;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  .navbar-header a:hover{
+    color: var(--primary-500)
+  }
+
+  .hero-cta{
+    background-color: var(--primary-default)
+  }
+
+  .hero-title{
+    color: #F0F0EF;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  .hero-caption{
+    color: #F0F0EF;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  .hero-title .hero-title-highlight{
+    color: var(--primary-default);
+  }
