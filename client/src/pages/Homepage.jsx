@@ -2,9 +2,9 @@ import React from "react";
 import '../styles/homepage.css';
 import ripplehomepage from "../assets/ripplehomepage.mp4";
 import aboutuspicture from "../assets/about-us-picture.png"
-// import influencer1 from "../assets/fitness-influencer1.png"
-// import influencer2 from "../assets/fitness-influencer2.png"
-// import influencer3 from "../assets/fitness-influencer3.png"
+import influencer1 from "../assets/fitness-influencer1.png"
+import influencer2 from "../assets/fitness-influencer2.png"
+import influencer3 from "../assets/fitness-influencer3.png"
 import NavbarListener from '../scripts/homepage.js';
 import { Navigate } from "react-router-dom";
 import Testimonial from "../components/testimonial.jsx"
@@ -97,19 +97,22 @@ function Homepage(){
                     </div>
                 </div>
                 <Testimonial
-                img = "./src/assets/fitness-influencer1.png"
+                // src = "./src/assets/fitness-influencer1.png"
+                src = {influencer1}
                 name="KIERA WEAVER"
                 details="35 | HOSPITALITY | METROPOLIS"
                 review="“This gym exceeded my expectations with its state-of-the-art equipment and motivating atmosphere. The knowledgeable staff provided excellent guidance, ensuring a fulfilling workout experience. Clean facilities and a variety of classes make it a top choice for fitness enthusiasts.“"
                 ></Testimonial>
                 <Testimonial
-                img = "./src/assets/fitness-influencer2.png"
+                // src = "./src/assets/fitness-influencer2.png"
+                src = {influencer2}
                 name="JULIUS CARTER"
                 details="35 | MEDIA | DOWNTOWN"
                 review="“Fantastic gym! Modern equipment, friendly staff, and diverse classes. It's my go-to for a satisfying workout and a welcoming fitness community.“">
                 </Testimonial>
                 <Testimonial
-                img = "./src/assets/fitness-influencer3.png"
+                // src = "./src/assets/fitness-influencer3.png"
+                src = {influencer3}
                 name="CHARLENE LEE"
                 details="26 | TECHNOLOGY | TAMPINES"
                 review="“Extraordinary! I’ve never come across a better fitness website. Encourages me to hit my step count and fitness goals. Would strongly recommend to anyone looking for a new year resolution.”">
