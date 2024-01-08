@@ -1,6 +1,10 @@
 import React from "react";
 import '../styles/homepage.css';
 import ripplehomepage from "../assets/ripplehomepage.mp4";
+import aboutuspicture from "../assets/about-us-picture.png"
+// import influencer1 from "../assets/fitness-influencer1.png"
+// import influencer2 from "../assets/fitness-influencer2.png"
+// import influencer3 from "../assets/fitness-influencer3.png"
 import NavbarListener from '../scripts/homepage.js';
 import { Navigate } from "react-router-dom";
 import Testimonial from "../components/testimonial.jsx"
@@ -73,7 +77,8 @@ function Homepage(){
             <div className="about-section w-full px-4">
 
                 <div className="about-section-container secondary-default-20 max-w-screen-xl flex items-center justify-between mx-auto my-8">
-                    <img className="about-us-image" src="./src/assets/about-us-picture.png"></img>
+                    {/* <img className="about-us-image" src="./src/assets/about-us-picture.png"></img> */}
+                    <img className="about-us-image" src={aboutuspicture}></img>
                     <div className="about-us-text w-1/2 text-right px-8 text-default">
                         <h2 className="f-h2-700">THERE IS A NEW GYM IN TOWN</h2>
                         <h5 className="f-h5 pt-8">{"Welcome to our fitness haven, where passion meets purpose. We're not just a gym. We're a community committed to sculpting healthier lives. With state-of-the-art facilities, expert trainers, and a supportive environment, we inspire individuals to embrace their fitness journey and achieve their wellness goals."}</h5>
@@ -87,13 +92,28 @@ function Homepage(){
 
                 <div className="testimonial-section-container max-w-screen-xl justify-between mx-auto my-8">
                     <div className="about-us-text text-center px-8 text-default">
-                        <h1 className="f-h1">DONT JUST TAKE OUR WORD FOR IT</h1>
-                        <h3 className="f-h3 pt-3">HERE ARE OUR TESTIMONIALS</h3>
+                        <h1 className="f-h1 testimonial-title">DONT JUST TAKE OUR WORD FOR IT</h1>
+                        <h3 className="f-h3 pt-3 testimonial-subtitle">HERE ARE OUR TESTIMONIALS</h3>
                     </div>
                 </div>
-                <Testimonial></Testimonial>
-                <Testimonial></Testimonial>
-                <Testimonial></Testimonial>
+                <Testimonial
+                img = "./src/assets/fitness-influencer1.png"
+                name="KIERA WEAVER"
+                details="35 | HOSPITALITY | METROPOLIS"
+                review="“This gym exceeded my expectations with its state-of-the-art equipment and motivating atmosphere. The knowledgeable staff provided excellent guidance, ensuring a fulfilling workout experience. Clean facilities and a variety of classes make it a top choice for fitness enthusiasts.“"
+                ></Testimonial>
+                <Testimonial
+                img = "./src/assets/fitness-influencer2.png"
+                name="JULIUS CARTER"
+                details="35 | MEDIA | DOWNTOWN"
+                review="“Fantastic gym! Modern equipment, friendly staff, and diverse classes. It's my go-to for a satisfying workout and a welcoming fitness community.“">
+                </Testimonial>
+                <Testimonial
+                img = "./src/assets/fitness-influencer3.png"
+                name="CHARLENE LEE"
+                details="26 | TECHNOLOGY | TAMPINES"
+                review="“Extraordinary! I’ve never come across a better fitness website. Encourages me to hit my step count and fitness goals. Would strongly recommend to anyone looking for a new year resolution.”">
+                </Testimonial>
             </div>
 
         </div>

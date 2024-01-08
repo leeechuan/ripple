@@ -1,14 +1,16 @@
-function Testimonial(){
+import React from "react"
+
+
+function Testimonial(props){
 
     return (
 
         <div>
-            <h1>hello world</h1>
+            <img src={props.img}></img>
+            <h4>{props.name}</h4>
+            <h6>{props.details}</h6>
+            <h6>{props.review}</h6>
         </div>
-
-
-
-
     )
 }
 
