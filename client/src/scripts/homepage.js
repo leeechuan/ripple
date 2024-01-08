@@ -16,4 +16,5 @@ function NavbarListener() {
 }
 
 
-export default NavbarListener
+
+export default NavbarListener;

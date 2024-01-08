@@ -160,14 +160,22 @@ h6{
 
 .layout-v1 .background-default{
     background-color: var(--background-default);
-  }
+}
 
 .layout-v1 .secondary-default-20{
     background-color: rgba(76, 103, 97, 0.20);
-  }
+}
+
+.layout-v1 .primary-default-20{
+  background-color: rgba(137, 41, 41, 0.20);
+}
 
 .layout-v1 .text-default{
   color: var(--text-default);
+}
+
+.layout-v1 .text-primary{
+  color: var(--primary-default)
 }
 
 .layout-v1 .btn-primary{

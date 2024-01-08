@@ -5,9 +5,10 @@ import aboutuspicture from "../assets/about-us-picture.png"
 import influencer1 from "../assets/fitness-influencer1.png"
 import influencer2 from "../assets/fitness-influencer2.png"
 import influencer3 from "../assets/fitness-influencer3.png"
-import NavbarListener from '../scripts/homepage.js';
+import NavbarListener from "../scripts/homepage.js";
 import { Navigate } from "react-router-dom";
 import Testimonial from "../components/testimonial.jsx"
+import Accordion from "../components/accordion.jsx";
 
 
 function Homepage(){
@@ -61,6 +62,7 @@ function Homepage(){
             </div>
             </nav>
 
+            {/* Intro Hero */}
             <header className="relative flex items-center justify-center h-screen overflow-hidden"> 
                 <div className="px-12 text-center">
                     <div className="hero-title relative pb-8 z-30 text-white">
@@ -74,6 +76,7 @@ function Homepage(){
                 <video autoPlay loop muted className="absolute z-10 w-auto min-w-full min-h-full max-w-none" src= {ripplehomepage}> </video> 
             </header> 
 
+            {/* About Section */}
             <div className="about-section w-full px-4">
 
                 <div className="about-section-container secondary-default-20 max-w-screen-xl flex items-center justify-between mx-auto my-8">
@@ -88,14 +91,17 @@ function Homepage(){
                 
             </div>
 
-            <div className="testimonial-section w-full px-4">
+            {/* Testimonial Section */}
+            <div className="w-full px-4 max-w-screen-xl mx-auto pb-8">
 
-                <div className="testimonial-section-container max-w-screen-xl justify-between mx-auto my-8">
+                <div className="justify-between mx-auto my-8">
                     <div className="about-us-text text-center px-8 text-default">
                         <h1 className="f-h1 testimonial-title">DONT JUST TAKE OUR WORD FOR IT</h1>
                         <h3 className="f-h3 pt-3 testimonial-subtitle">HERE ARE OUR TESTIMONIALS</h3>
                     </div>
                 </div>
+
+                <div className="lg:flex lg:justify-between mx-auto testimonial-list">
                 <Testimonial
                 // src = "./src/assets/fitness-influencer1.png"
                 src = {influencer1}
@@ -117,8 +123,87 @@ function Homepage(){
                 details="26 | TECHNOLOGY | TAMPINES"
                 review="“Extraordinary! I’ve never come across a better fitness website. Encourages me to hit my step count and fitness goals. Would strongly recommend to anyone looking for a new year resolution.”">
                 </Testimonial>
+                </div>
+
             </div>
 
+
+            <div className="lg:flex w-full px-4 max-w-screen-xl mx-auto pb-8 py-10">
+                <div className="lg:w-1/3 faq-title">
+                    <h1 className="f-h1 text-primary">QUESTIONS?</h1>
+                    <h1 className="f-h1 text-default">YOU MIGHT FIND YOUR ANSWER HERE</h1>
+                </div>
+
+                <div className="lg:w-2/3 faq-accordions">
+
+                    <div id="accordion-collapse" data-accordion="collapse">
+                        
+                        <Accordion
+                        id="1"
+                        title="title1"
+                        content="content1">
+                        </Accordion>
+                        <Accordion
+                        id="2"
+                        title="title2"
+                        content="content2">
+                        </Accordion>
+                        <Accordion
+                        id="3"
+                        title="title3"
+                        content="content3">
+                        </Accordion>
+                        <Accordion
+                        id="4"
+                        title="title4"
+                        content="content4">
+                        </Accordion>
+
+                        {/* <h2 id="accordion-collapse-heading-2" className="accordion-container">
+                            <button type="button" className="accordion flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
+                                <span>Is there a Figma file available?</span>
+                                <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
+                                </svg>
+                            </button>
+                        </h2>
+
+                        <div id="accordion-collapse-body-2" className="hidden" aria-labelledby="accordion-collapse-heading-2">
+                            <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
+                            <p className="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" className="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
+                            </div>
+                        </div> */}
+
+
+                        {/* <h2 id="accordion-collapse-heading-3" className="accordion-container">
+                            <button type="button" className="accordion flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
+                                <span>What are the differences between Flowbite and Tailwind UI?</span>
+                                <svg data-accordion-icon className="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5"/>
+                                </svg>
+                            </button>
+                        </h2>
+
+                        <div id="accordion-collapse-body-3" className="hidden" aria-labelledby="accordion-collapse-heading-3">
+                            <div className="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
+                            <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
+                            </div>
+                        </div> */}
+
+
+                    </div>
+                
+                </div>
+
+
+
+            </div>
+
+
+            
         </div>
 
 
