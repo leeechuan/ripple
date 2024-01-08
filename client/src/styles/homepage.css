@@ -70,3 +70,86 @@
   .layout-v1 .hero-title .hero-title-highlight{
     color: var(--primary-default);
   }
+
+
+/* About us section */
+
+  .about-section{
+    height: 33vw;
+  }
+
+  .about-section-container{
+    height: 25vw;
+    border-radius: 20px;
+  }
+
+  .about-us-image{
+    position: relative;
+    top: 5vw;
+    left: 5vw;
+    width: 28vw;
+  }
+
+
+  @media(max-width: 1280px){
+    .about-us-image{
+      position: relative;
+      top: 7vw;
+      left: 7vw;
+      width: 34vw;
+      }
+    .about-section-container{
+      height: 35vw;
+      border-radius: 20px;
+    }
+    .about-section{
+      height: 45vw;
+    }
+
+  }
+
+  @media(max-width: 1100px){
+
+  .about-us-image{
+    display: none
+  }
+
+  .about-us-text{
+    width: auto;
+    text-align: center;
+  }
+  }
+
+  @media(max-width: 700px){
+    .about-section{
+      height: auto
+    }
+    .about-section-container{
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    }
+
+  /* Testimonial Section */
+  .testimonial-section{
+    height: 45vw;
+  }
+
+  .testimonial-section-container{
+    height: 25vw;
+    border-radius: 20px;
+  }
+
+
+  @media(max-width: 700px){
+    .testimonial-section{
+      height: auto
+    }
+    .testimonial-section-container{
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }

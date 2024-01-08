@@ -184,6 +184,10 @@ h6{
     background: var(--primary-300);
   }
 
+.layout-v1 .input-outline{
+  outline-color: var(--primary-default);
+}
+
 .layout-v1 .bg-default-full{
     background-color: var(--background-default);
     width: 100vw;
@@ -197,11 +201,25 @@ h6{
   font-weight: 700;
 }
 
-.layout-v1 .f-h2{
+.layout-v1 .f-h2-title{
   font-family: 'Quicksand', sans-serif;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
+}
+
+.layout-v1 .f-h2-400{
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.layout-v1 .f-h2-700{
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .layout-v1 .f-h3{

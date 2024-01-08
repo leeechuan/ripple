@@ -1,5 +1,5 @@
 function LoginSpiral() {
-  const words = "ripple ripple ripple ripple ripple";
+  const words = "ripple ripple ripple ripple ripple ripple ripple ripple ripple ripple";
 
   const ANIMATION_DURATION = 4000; // ms
 
