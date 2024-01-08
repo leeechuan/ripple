@@ -1,0 +1,78 @@
+.login-page{
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.login-page .spiral{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spiral {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+.spiral-container{
+  position: relative;
+  top: 45vh;
+  left: -5vw;
+  transform: rotate(-20deg);
+  opacity: 0.03;
+}
+
+
+.login-page .character{
+  color: var(--text-default);
+  font-size: 4em;
+  transform: translateY(calc(sin(var(--angle))*100px)) scale(calc(cos(var(--angle)) * 0.5 + 0.5));
+  animation: spiral 4s linear infinite;
+}
+
+.login-page .login-container{
+  max-width: 30vw;
+  max-height: 54vh;
+  position: relative;
+  left: 35vw;
+  top: 25vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+@media (max-width: 1100px) {
+  .login-page .login-container {
+    max-width: 50vw;
+    max-height: 54vh;
+    position: relative;
+    left: 25vw;
+    top: 25vh;
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
+@media (max-width: 650px) {
+  .login-page .login-container {
+    max-width: 70vw;
+    max-height: 54vh;
+    position: relative;
+    left: 15vw;
+    top: 25vh;
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
