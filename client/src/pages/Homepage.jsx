@@ -116,7 +116,6 @@ function Homepage(){
             <div className="navbar-header items-center justify-between w-full md:flex md:w-auto md:order-1">
                 <ul className="background-default md:gap-x-7 flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
                 <li className="">
-                   {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">ABOUT US</a> */}
                 <Link
                     className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                     activeClass="active"
@@ -131,7 +130,6 @@ function Homepage(){
                 </Link>
                 </li>
                 <li>
-                    {/* <a href="" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">TESTIMONIALS</a> */}
                 <Link
                     className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                     activeClass="active"
@@ -146,7 +144,6 @@ function Homepage(){
                 </Link>
                 </li>
                 <li>
-                    {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">CLUBS</a> */}
                 <Link
                     className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                     activeClass="active"
@@ -161,7 +158,6 @@ function Homepage(){
                 </Link>
                 </li>
                 <li>
-                    {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">PRICING</a> */}
                 <Link
                     className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
                     activeClass="active"
@@ -192,7 +188,7 @@ function Homepage(){
                     <button href= "https://theripplegym.vercel.app/" className="btn-primary relative z-30 p-5 text-2xl text-white bg-green-400 bg-opacity-50 rounded-xl"> Get Started </button> 
                 </div>
                 
-                <video autoPlay loop muted className="absolute z-10 w-auto min-w-full min-h-full max-w-none" src= {ripplehomepage}> </video> 
+                <video autoPlay loop muted playsInline className="absolute z-10 w-auto min-w-full min-h-full max-w-none" src= {ripplehomepage}> </video> 
             </header> 
 
             {/* About Section */}
@@ -284,9 +280,9 @@ function Homepage(){
 
             {/* Promotional Section*/}
 
-            <img className="promo-background w-full" src={promotionalbg} id="promotional-section"></img>
+            <img className="promo-background w-full" src={promotionalbg}></img>
             <div className="promo-form">
-                <h4 className="promo-title f-h4 text-default">CHAT WITH US!</h4>
+                <h4 className="promo-title f-h4 text-default" id="promotional-section">CHAT WITH US!</h4>
                     <form className="space-y-4 md:space-y-6" action="#">
                     <div>
                         <label htmlFor="name" className="block mb-2 f-label text-default">How do we address you?</label>
