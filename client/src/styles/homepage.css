@@ -38,7 +38,7 @@
   }
 
   .layout-v1 .navbar-header a:hover{
-    color: var(--primary-500)
+    color: var(--primary-300);
   }
 
   .layout-v1 .hero-cta{
