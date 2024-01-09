@@ -174,6 +174,10 @@ h6{
   color: var(--text-default);
 }
 
+.layout-v1 .text-faint{
+  color: var(--text-400);
+}
+
 .layout-v1 .text-primary{
   color: var(--primary-default)
 }
@@ -188,8 +192,22 @@ h6{
     line-height: 150%; /* 24px */
   }
 
+.layout-v1 .btn-secondary-solid{
+    border-radius: 6px;
+    background: var(--secondary-default);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 24px */
+  }
+
 .layout-v1 .btn-primary:hover{
     background: var(--primary-300);
+  }
+
+.layout-v1 .btn-secondary-solid:hover{
+    background: var(--secondary-300);
   }
 
 .layout-v1 .input-outline{

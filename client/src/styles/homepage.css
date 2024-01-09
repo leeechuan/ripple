@@ -138,11 +138,6 @@
     }
 
   /* Testimonial Section */
-
-
-  /* .testimonial-section-container{
-    height: 10vw;
-  } */
   
   .testimonial-indiv-container{
     border-radius: 20px;
@@ -178,12 +173,26 @@
     }
   }
 
+  @media(max-width: 640px){
+    .testimonial-indiv-container{
+      width: 80vw;
+      margin-top: 16px;
+      position: relative;
+      left: calc((100vw - 80vw)/2 - 1.5rem)
+    }
+  }
+
   /* FAQ Section */
+
+  .faq-section{
+    padding-top: 4rem;
+    padding-bottom: 8rem
+  }
 
   .faq-accordions .accordion{
     color: #F0F0EF;
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -193,6 +202,7 @@
   .accordion{
     background-color: rgba(76, 103, 97, 0.20);
     border-radius: 20px;
+    text-align: left;
   }
 
   .accordion-body{
@@ -203,8 +213,155 @@
 
 
   @media(max-width: 1024px){
+    .faq-section{
+      padding-top: 2rem;
+      padding-bottom: 4rem
+    }
+
     .layout-v1 .faq-title h1{
       font-size: 20px;
+    }
+
+    .faq-title{
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #F0F0EF
+    }
+  }
+
+  /* Promo section */
+
+
+  .layout-v1 .promo-form .promo-title{
+    border-bottom: 1px solid var(--text-default);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .promo-form{
+    width: 30vw;
+    position: relative;
+    top: -54vw;
+    left: 12vw;
+    height: 8vh
+  }
+
+  @media(max-width: 768px){
+    .promo-background{
+      display: none;
+    }
+    .layout-v1 .promo-form{
+      width: 100vw;
+      position: static;
+      padding-left: 1rem;
+      padding-right: 2rem;
+      height: 50vh;
+    }
+
+  }
+
+  @media(max-width: 1024px){
+    .promo-form{
+      height: 4vh;
+    }
+  }
+
+  /* Pricing Section */
+
+  .price-indiv-container{
+    border-radius: 20px;
+    width: 32%;
+  }
+
+  .hide-perk{
+    visibility: hidden;
+  }
+
+  .popular-tag{
+    color: #F0F0EF;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  @media(max-width: 1024px){
+    .price-section{
+      height: auto
+    }
+    .price-section-container{
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .layout-v1 .price-title{
+      font-size: 32px;
+    }
+    .layout-v1 .price-subtitle{
+      font-size: 16px;
+    }
+  }
+
+  @media(max-width: 1024px){
+    .price-list{
+      margin-top: 16px
+    }
+    .price-indiv-container{
+      width: 50vw;
+      margin-top: 16px;
+      position: relative;
+      left: calc((100vw - 50vw)/2 - 1.5rem)
+    }
+  }
+
+  @media(max-width: 640px){
+    .price-indiv-container{
+      width: 80vw;
+      margin-top: 16px;
+      position: relative;
+      left: calc((100vw - 80vw)/2 - 1.5rem)
+    }
+  }
+
+  /* Homepage Modal */
+  .ReactModalPortal .ReactModal__Overlay.ReactModal__Overlay--after-open{
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  .ReactModalPortal .ReactModal__Overlay.ReactModal__Overlay--after-open .ReactModal__Content.ReactModal__Content--after-open{
+    width: 40vw;
+    height: 50vh;
+    position: relative !important;
+    top: 25vh !important;
+    left: 30vw !important;
+    background-color: transparent!important;
+    border-color: transparent !important;
+    overflow: hidden;
+  }
+
+
+  @media(max-width: 1024px){
+    .ReactModalPortal .ReactModal__Overlay.ReactModal__Overlay--after-open .ReactModal__Content.ReactModal__Content--after-open{
+      width: 60vw;
+      height: 50vh;
+      position: relative !important;
+      top: 25vh !important;
+      left: 20vw !important;
+    }
+  }
+
+  @media(max-width: 640px){
+    .ReactModalPortal .ReactModal__Overlay.ReactModal__Overlay--after-open .ReactModal__Content.ReactModal__Content--after-open{
+      width: 85vw;
+      height: 50vh;
+      position: relative !important;
+      top: 25vh !important;
+      left: 7.5vw !important;
     }
   }
 
