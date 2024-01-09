@@ -244,7 +244,7 @@
     position: relative;
     top: -54vw;
     left: 12vw;
-    height: 8vh
+    height: 4vh;
   }
 
   @media(max-width: 768px){
@@ -257,6 +257,7 @@
       padding-left: 1rem;
       padding-right: 2rem;
       height: 50vh;
+      min-height: 400px;
     }
 
   }
