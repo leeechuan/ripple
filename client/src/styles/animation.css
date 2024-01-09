@@ -1,7 +1,8 @@
-body{
+body, html {
     overflow-x: hidden;
+    margin: 0; /* Ensure no default margin */
+    padding: 0; /* Ensure no default padding */
 }
-
 
 .hide-left {
     opacity: 0;
