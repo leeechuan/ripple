@@ -5,7 +5,15 @@ export default {
     extend: {
       fontSize: {
 
+      },
+      keyframes: {
+        'trans-right':{
+          '0%, 100%': {transform: 'translateX(1000px)'},
+          '50%' : {transform: 'translateX(0)'}
+        }
+
       }
+
     },
   },
   plugins: [],

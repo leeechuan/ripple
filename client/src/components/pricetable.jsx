@@ -8,7 +8,7 @@ function PriceTable(props){
 
     return (
 
-    <div className={(([props.isMostPopular]=="false") ? "secondary-default-20" : "primary-default-20") + " text-default price-indiv-container px-6 py-8"}>
+    <div className={(([props.isMostPopular]=="false") ? "secondary-default-20" : "primary-default-20") + " text-default price-indiv-container px-6 py-8 hide-left delay-"+(props.id*3)}>
         <div className="flex flex-col p-6 mx-auto max-w-lg text-center rounded-lg xl:p-8">
         <p className={(([props.isMostPopular]=="false") ? "hide-perk" : "") + " popular-tag pb-4"}>Most Popular</p>
             <h2 className="mb-4 font-bold">{props.title}</h2>

@@ -5,7 +5,7 @@ function Testimonial(props){
 
     return (
 
-        <div className="primary-default-20 text-default testimonial-indiv-container px-6 py-8">
+        <div className={"primary-default-20 text-default testimonial-indiv-container px-6 py-8 hide-left delay-"+props.delay}>
             <div className="flex items-center">
                 <img className="w-20 h-20 rounded-full" src={props.src}></img>
                 <div className="pl-3">

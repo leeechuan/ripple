@@ -1,5 +1,7 @@
 import React , {useEffect, useState} from "react";
+import { Link } from "react-scroll";
 import '../styles/homepage.css';
+import '../styles/animation.css'
 import ripplehomepage from "../assets/ripplehomepage.mp4";
 import aboutuspicture from "../assets/about-us-picture.png"
 import influencer1 from "../assets/fitness-influencer1.png"
@@ -11,7 +13,7 @@ import Testimonial from "../components/testimonial.jsx"
 import Accordion from "../components/accordion.jsx";
 import PriceTable from "../components/pricetable.jsx";
 import PopupModal from "../components/modal-homepage.jsx";
-
+import Animation from "../scripts/annimation.js";
 
 
 
@@ -29,8 +31,6 @@ function Homepage(){
       
         return () => clearTimeout(timeout);
     }, [])
-
-
 
 
     // For Hamburger Menu Dropdown
@@ -67,6 +67,13 @@ function Homepage(){
     setMenuVisible(!isMenuVisible);
     };
 
+
+    //Get Animation Script
+    useEffect(() => {
+        //Precautionary check to prevent js from running unnecessarily on other pages
+        if (window.location.pathname === '/')
+        Animation();
+    })
 
 
 
@@ -108,17 +115,65 @@ function Homepage(){
             {!isMobileView || isMenuVisible ? (
             <div className="navbar-header items-center justify-between w-full md:flex md:w-auto md:order-1">
                 <ul className="background-default md:gap-x-7 flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
-                <li>
-                    <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">ABOUT US</a>
+                <li className="">
+                   {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">ABOUT US</a> */}
+                <Link
+                    className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                    activeClass="active"
+                    to="about-us"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    style={{ cursor: 'pointer' }}
+                >
+                    ABOUT US
+                </Link>
                 </li>
                 <li>
-                    <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">TESTIMONIALS</a>
+                    {/* <a href="" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">TESTIMONIALS</a> */}
+                <Link
+                    className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                    activeClass="active"
+                    to="testimonial-section"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    style={{ cursor: 'pointer' }}
+                >
+                    TESTIMONIALS
+                </Link>
                 </li>
                 <li>
-                    <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">CLUBS</a>
+                    {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">CLUBS</a> */}
+                <Link
+                    className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                    activeClass="active"
+                    to="promotional-section"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    style={{ cursor: 'pointer' }}
+                >
+                    JOIN US
+                </Link>
                 </li>
                 <li>
-                    <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">PRICING</a>
+                    {/* <a href="#" className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700">PRICING</a> */}
+                <Link
+                    className="block py-2 px-3 rounded md:p-0 hover:bg-gray-700 md:hover:bg-transparent"
+                    activeClass="active"
+                    to="pricing-section"
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                    style={{ cursor: 'pointer' }}
+                >
+                    PRICING
+                </Link>
                 </li>
                 </ul>
             </div>
@@ -141,11 +196,11 @@ function Homepage(){
             </header> 
 
             {/* About Section */}
-            <div className="about-section w-full px-4">
+            <div className="about-section w-full px-4" id="about-us">
 
                 <div className="about-section-container secondary-default-20 max-w-screen-xl flex items-center justify-between mx-auto my-8">
-                    <img className="about-us-image" src={aboutuspicture}></img>
-                    <div className="about-us-text w-1/2 text-right px-8 text-default">
+                    <img className="about-us-image hide-left" src={aboutuspicture}></img>
+                    <div className="about-us-text w-1/2 text-right px-8 text-default hide-right">
                         <h2 className="f-h2-700">THERE IS A NEW GYM IN TOWN</h2>
                         <h5 className="f-h5 pt-8">{"Welcome to our fitness haven, where passion meets purpose. We're not just a gym. We're a community committed to sculpting healthier lives. With state-of-the-art facilities, expert trainers, and a supportive environment, we inspire individuals to embrace their fitness journey and achieve their wellness goals."}</h5>
                         <h5 className="f-h5 pt-5 underline">Find out more</h5>
@@ -155,29 +210,32 @@ function Homepage(){
             </div>
 
             {/* Testimonial Section */}
-            <div className="w-full px-4 max-w-screen-xl mx-auto pb-8">
+            <div className="w-full px-4 max-w-screen-xl mx-auto pb-8" id="testimonial-section">
 
                 <div className="justify-between mx-auto my-8">
                     <div className="about-us-text text-center px-8 text-default">
-                        <h1 className="f-h1 testimonial-title">DONT JUST TAKE OUR WORD FOR IT</h1>
-                        <h3 className="f-h3 pt-3 testimonial-subtitle">HERE ARE OUR TESTIMONIALS</h3>
+                        <h1 className="f-h1 testimonial-title hide-fade">DONT JUST TAKE OUR WORD FOR IT</h1>
+                        <h3 className="f-h3 pt-3 testimonial-subtitle hide-fade delay-3">HERE ARE OUR TESTIMONIALS</h3>
                     </div>
                 </div>
 
                 <div className="lg:flex lg:justify-between mx-auto testimonial-list">
                 <Testimonial
+                delay = "9"
                 src = {influencer1}
                 name="KIERA WEAVER"
                 details="35 | HOSPITALITY | METROPOLIS"
                 review="“This gym exceeded my expectations with its state-of-the-art equipment and motivating atmosphere. The knowledgeable staff provided excellent guidance, ensuring a fulfilling workout experience. Clean facilities and a variety of classes make it a top choice for fitness enthusiasts.“"
                 ></Testimonial>
                 <Testimonial
+                delay = "5"
                 src = {influencer2}
                 name="JULIUS CARTER"
                 details="35 | MEDIA | DOWNTOWN"
                 review="“Fantastic gym! Modern equipment, friendly staff, and diverse classes. It's my go-to for a satisfying workout and a welcoming fitness community.“">
                 </Testimonial>
                 <Testimonial
+                delay = "1"
                 src = {influencer3}
                 name="CHARLENE LEE"
                 details="26 | TECHNOLOGY | TAMPINES"
@@ -189,10 +247,10 @@ function Homepage(){
 
             {/* FAQ Section */}
 
-            <div className="faq-section lg:flex w-full px-4 max-w-screen-xl mx-auto py-10 items-center">
+            <div className="faq-section lg:flex w-full px-4 max-w-screen-xl mx-auto py-10 items-center" id="faq-section">
                 <div className="lg:w-1/3 faq-title">
-                    <h1 className="f-h1 text-primary">QUESTIONS?</h1>
-                    <h1 className="f-h1 text-default">YOU MIGHT FIND YOUR ANSWER HERE</h1>
+                    <h1 className="f-h1 text-primary hide-left">QUESTIONS?</h1>
+                    <h1 className="f-h1 text-default hide-left">YOU MIGHT FIND YOUR ANSWER HERE</h1>
                 </div>
 
                 <div className="lg:w-2/3 faq-accordions">
@@ -226,7 +284,7 @@ function Homepage(){
 
             {/* Promotional Section*/}
 
-            <img className="promo-background w-full" src={promotionalbg}></img>
+            <img className="promo-background w-full" src={promotionalbg} id="promotional-section"></img>
             <div className="promo-form">
                 <h4 className="promo-title f-h4 text-default">CHAT WITH US!</h4>
                     <form className="space-y-4 md:space-y-6" action="#">
@@ -254,12 +312,12 @@ function Homepage(){
             {/* Pricing Section */}
 
             <div>
-                <div className="w-full px-4 max-w-screen-xl mx-auto pb-8">
+                <div className="w-full px-4 max-w-screen-xl mx-auto pb-8" id="pricing-section">
 
                     <div className="justify-between mx-auto my-8">
                         <div className="about-us-text text-center px-8 text-default">
-                            <h1 className="f-h1 price-title">PLANS & PRICING</h1>
-                            <h3 className="f-h3 pt-3 price-subtitle text-primary">TRANSPARENT FLAT RATES</h3>
+                            <h1 className="f-h1 price-title hide-fade">PLANS & PRICING</h1>
+                            <h3 className="f-h3 pt-3 price-subtitle text-primary hide-fade delay-3">TRANSPARENT FLAT RATES</h3>
                         </div>
                     </div>
 

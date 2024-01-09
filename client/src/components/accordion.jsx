@@ -11,7 +11,7 @@ function Accordion(props){
 
     return (
 
-    <div className="py-3">
+    <div className={"py-3 hide-right delay-"+props.id}>
         <h2 id={"accordion-collapse-heading-"+props.id} className="accordion-container">
         <button onClick={toggleContentVisibility} type="button" className="z-50 accordion flex items-center justify-between w-full p-5 font-medium rtl:text-right gap-3">
             <span>{props.title}</span>

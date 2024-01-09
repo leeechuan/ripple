@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import '../styles/login.css';
-import LoginSpiral from "../scripts/loginspiral";
+import LoginSpiral from "../scripts/loginspiral.js";
 
 function Login(){
 
     useEffect(() => {
+        //Precautionary check to prevent js from running unnecessarily on other pages
+        if (window.location.pathname === '/login')
         LoginSpiral();
     })
 
