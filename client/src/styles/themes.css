@@ -290,7 +290,9 @@ h6{
   font-weight: 400;
 }
 
-
+.layout-v1 input.error{
+  border: 1px solid var(--primary-400)
+}
 
 
 

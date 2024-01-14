@@ -1,13 +1,17 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+require('dotenv').config()
+const workoutRoutes = require('./routes/workouts.js')
 // const UserModel = require("./models/Users")
 
+
+// Express app
 const app = express()
 app.use(cors())
 app.use(express.json());
 
-mongoose.connect("mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/?retryWrites=true&w=majority")
+// Connect to vercel
 
 app.use(cors(
     {
@@ -16,6 +20,43 @@ app.use(cors(
         credentials: true
     }
 ))
+
+
+// Middleware
+
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
+
+
+// Routes
+
+// app.get('/', (req, res) => {
+//     res.json({msg: "welcome"})
+// })
+
+app.use('/api/workouts', workoutRoutes)
+
+
+
+
+
+
+
+// Connect to DB
+
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log('connected and listening on port', process.env.PORT)
+        })
+    })
+    .catch((error) =>{
+        console.log(error)
+    })
+
+
 
 
 
@@ -38,6 +79,3 @@ app.use(cors(
 // })
 
 
-app.listen(3001, ()=> {
-    console.log("Server is Running")
-})
