@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 const workoutRoutes = require('./routes/workouts.js')
-// const UserModel = require("./models/Users")
+const userRoutes = require('./routes/users.js')
 
 
 // Express app
@@ -32,13 +32,8 @@ app.use((req, res, next) => {
 
 // Routes
 
-// app.get('/', (req, res) => {
-//     res.json({msg: "welcome"})
-// })
-
 app.use('/api/workouts', workoutRoutes)
-
-
+app.use('/api/users', userRoutes)
 
 
 

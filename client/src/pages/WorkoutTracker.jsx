@@ -20,7 +20,7 @@ const WorkoutTracker = () => {
 
         fetchWorkouts()
 
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">
