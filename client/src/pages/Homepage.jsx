@@ -198,8 +198,8 @@ function Homepage(){
                     <img className="about-us-image hide-left" src={aboutuspicture}></img>
                     <div className="about-us-text w-1/2 text-right px-8 text-default hide-right">
                         <h2 className="f-h2-700">THERE IS A NEW GYM IN TOWN</h2>
-                        <h5 className="f-h5 pt-8">{"Welcome to our fitness haven, where passion meets purpose. We're not just a gym. We're a community committed to sculpting healthier lives. With state-of-the-art facilities, expert trainers, and a supportive environment, we inspire individuals to embrace their fitness journey and achieve their wellness goals."}</h5>
-                        <h5 className="f-h5 pt-5 underline">Find out more</h5>
+                        <h5 className="f-h5-700 pt-8">{"Welcome to our fitness haven, where passion meets purpose. We're not just a gym. We're a community committed to sculpting healthier lives. With state-of-the-art facilities, expert trainers, and a supportive environment, we inspire individuals to embrace their fitness journey and achieve their wellness goals."}</h5>
+                        <h5 className="f-h5-700 pt-5 underline">Find out more</h5>
                     </div>
                 </div>
                 
@@ -211,7 +211,7 @@ function Homepage(){
                 <div className="justify-between mx-auto my-8">
                     <div className="about-us-text text-center px-8 text-default">
                         <h1 className="f-h1 testimonial-title hide-fade">DONT JUST TAKE OUR WORD FOR IT</h1>
-                        <h3 className="f-h3 pt-3 testimonial-subtitle hide-fade delay-3">HERE ARE OUR TESTIMONIALS</h3>
+                        <h3 className="f-h3-700 pt-3 testimonial-subtitle hide-fade delay-3">HERE ARE OUR TESTIMONIALS</h3>
                     </div>
                 </div>
 
@@ -282,7 +282,7 @@ function Homepage(){
 
             <img className="promo-background w-full" src={promotionalbg}></img>
             <div className="promo-form">
-                <h4 className="promo-title f-h4 text-default" id="promotional-section">CHAT WITH US!</h4>
+                <h4 className="promo-title f-h4-700 text-default" id="promotional-section">CHAT WITH US!</h4>
                     <form className="space-y-4 md:space-y-6" action="#">
                     <div>
                         <label htmlFor="name" className="block mb-2 f-label text-default">How do we address you?</label>
@@ -313,7 +313,7 @@ function Homepage(){
                     <div className="justify-between mx-auto my-8">
                         <div className="about-us-text text-center px-8 text-default">
                             <h1 className="f-h1 price-title hide-fade">PLANS & PRICING</h1>
-                            <h3 className="f-h3 pt-3 price-subtitle text-primary hide-fade delay-3">TRANSPARENT FLAT RATES</h3>
+                            <h3 className="f-h3-700 pt-3 price-subtitle text-primary hide-fade delay-3">TRANSPARENT FLAT RATES</h3>
                         </div>
                     </div>
 
