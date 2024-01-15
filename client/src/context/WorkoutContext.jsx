@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 
 export const WorkoutsContext = createContext()
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const workoutsReducer = (state,action) => {
     switch (action.type) {
         case 'SET_WORKOUTS':

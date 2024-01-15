@@ -2,14 +2,23 @@ import { useWorkoutsContext } from "../hooks/useWorkoutContext"
 
 // Format Date (date-fns)
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const WorkoutDetail = ({ workout }) => {
 
     const { dispatch } = useWorkoutsContext()
+    const { user } = useAuthContext()
 
     const handleClick = async () => {
+        if(!user){
+            return
+        }
+
         const response = await fetch('http://localhost:3001/api/workouts/' + workout._id, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
         })
         const json = await response.json()
 
@@ -20,12 +29,17 @@ const WorkoutDetail = ({ workout }) => {
 
 
     return (
-        <div className="workout-detail">
-            <h4>{workout.title}</h4>
-            <p>Load (kg): {workout.load}</p>
-            <p>Reps: {workout.reps}</p>
-            <p>{formatDistanceToNow(new Date(workout.createdAt),{ addSuffix: true })}</p>
-            <button onClick={handleClick}>Delete</button>
+        <div className="workout-detail f-h5-400 flex">
+            <div className="w-5/6">
+                <h4 className="workout-title f-h3-400">{workout.title}</h4>
+                <p>Load (kg): {workout.load}</p>
+                <p>Reps: {workout.reps}</p>
+                <p className="italic">{formatDistanceToNow(new Date(workout.createdAt),{ addSuffix: true })}</p>
+            </div>
+            <div className="w-1/6">
+                <svg onClick={handleClick} className="h-6 w-6 ml-auto mt-1 text-red-500 delete-workout-icon"  width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="7" x2="20" y2="7" />  <line x1="10" y1="11" x2="10" y2="17" />  <line x1="14" y1="11" x2="14" y2="17" />  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+            </div>
+            
         </div>
     )
 }

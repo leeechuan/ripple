@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useWorkoutsContext } from "../hooks/useWorkoutContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
 const WorkoutForm = () => {
     
@@ -10,9 +11,15 @@ const WorkoutForm = () => {
     const [reps, setReps] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+    const { user } = useAuthContext()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        if(!user){
+            setError('You must be logged in')
+            return
+        }
 
         const workout = {title, load, reps}
 
@@ -20,7 +27,8 @@ const WorkoutForm = () => {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
 
@@ -42,25 +50,25 @@ const WorkoutForm = () => {
     }
     
     return (
-        <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Workout</h3>
-            <label>Excerise Title:</label>
-            <input className={emptyFields.includes('title') ? 'error' : ''}
+        <form className="create workout-create-form" onSubmit={handleSubmit}>
+            <h3 className="f-h3-400">Add a New Workout</h3>
+            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('title') ? 'error' : '')}
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}></input>
-
-            <input className={emptyFields.includes('load') ? 'error' : ''}
+            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('load') ? 'error' : '')}
             type="number"
             onChange={(e) => setLoad(e.target.value)}
             value={load}></input>
-
-            <input className={emptyFields.includes('reps') ? 'error' : ''}
+            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('reps') ? 'error' : '')}
             type="number"
             onChange={(e) => setReps(e.target.value)}
             value={reps}></input>
 
-            <button>Add a workout</button>
+            <button className="btn-primary text-default p-2 mt-6">Add a workout</button>
             {error && <div className="error">{error}</div>}
         </form>
 

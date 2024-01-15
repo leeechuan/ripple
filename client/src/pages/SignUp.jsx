@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import '../styles/login.css';
 import LoginSpiral from "../scripts/loginspiral.js";
-import { useLogin } from "../hooks/useLogin.js";
-// import Navbar from "../components/Navbar.jsx";
+import { useSignup } from "../hooks/useSignup.js";
 
-function Login(){
+function SignUp(){
 
     useEffect(() => {
         //Precautionary check to prevent js from running unnecessarily on other pages
-        if (window.location.pathname === '/login1')
+        if (window.location.pathname === '/signup1')
         LoginSpiral();
     })
 
     const [email ,setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const {login, error, isLoading} = useLogin()
+    const {signup, error, isLoading} = useSignup()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await login(email, password)
+        await signup(email, password)
     }
 
 
@@ -27,7 +26,6 @@ function Login(){
     return(    
     
     <div className="login-page">
-
     
         <div className="bg-default-full">
 
@@ -43,7 +41,7 @@ function Login(){
             <div className="login-container secondary-default-20 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h2 className="font-bold text-center f-h2-title text-default">
-                LOGIN
+                SIGN UP
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" action="#">
                 <div>
@@ -63,14 +61,13 @@ function Login(){
                     </div>
                     <a href="#" className="f-h6-400 text-default text-primary-600 hover:underline">Forgot password?</a>
                 </div>
-                <button disabled={isLoading} type="submit" className="w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                <button disabled = {isLoading} type="submit" className="w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                 <p className="f-h6-400 text-default text-center">
                       {"Don't have an account with us? "}
                     <a href="#" className="font-medium text-primary-600 underline">Sign up</a>
                 </p>
-                {error && <div className="error">{error}</div>}
+                {error && <div className="error"> {error} </div>}
             </form>
-
 
         </div>
 
@@ -92,4 +89,4 @@ function Login(){
     )
 }
 
-export default Login
+export default SignUp

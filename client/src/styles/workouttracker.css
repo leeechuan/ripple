@@ -1,0 +1,19 @@
+.workout-detail{
+    border: 1px solid rgba(76, 103, 97, 0.50);
+    background-color: rgba(76, 103, 97, 0.20);
+    border-radius: 20px;
+    padding: var(--space-m)
+
+}
+
+.delete-workout-icon{
+    cursor: pointer;
+}
+
+.workout-create-form{
+    margin-top: 30px;
+    border: 1px solid rgba(76, 103, 97, 0.50);
+    background-color: rgba(76, 103, 97, 0.20);
+    border-radius: 20px;
+    padding: var(--space-m)
+}
