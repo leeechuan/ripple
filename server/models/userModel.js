@@ -11,7 +11,29 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    age: {
+        type: Number,
+        required: false
+    },
+    goals: {
+        type: {
+            calories: {
+                type: Number,
+                required: false
+            },
+            distance: {
+                type: Number,
+                required: false
+            },
+            duration: {
+                type: Number,
+                required: false
+            }
+        },
+        required: false
     }
+
 })
 
 //Static signup method

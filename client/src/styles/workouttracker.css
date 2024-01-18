@@ -11,13 +11,56 @@
 }
 
 .workout-create-form{
-    margin-top: 30px;
+    /* margin-top: 30px; */
     border: 1px solid rgba(76, 103, 97, 0.50);
     background-color: rgba(76, 103, 97, 0.20);
     border-radius: 20px;
     padding: var(--space-m)
 }
 
+.progress-ring__circle {
+    stroke-dasharray: 400, 400;
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+@media(max-width: 885px){
+    .weekly-goal-rings .weekly-goal-rings-header{
+        text-align: center
+    }
+}
+
+
 .workout-detail+.workout-detail{
     margin-top: var(--space-s)
 }
+
+.weekly-goal-rings{
+    border: 2px solid var(--background-300);
+    border-radius: 20px;
+    padding: 70px 50px
+}
+
+.workout-form{
+    width: calc(100%/3)
+}
+
+
+@media(max-width: 1024px){
+    .workout-form{
+        width: auto
+    }
+}
+
+.workout-detail-table{
+    width: calc(100%/3*2)
+}
+
+
+@media(max-width: 1024px){
+    .workout-detail-table{
+        width: auto
+    }
+}
+

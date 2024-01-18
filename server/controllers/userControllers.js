@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
 
 
 
-//GET a single workout
+//SIGNUP user
 const signupUser = async (req, res) => {
     const {email, password} = req.body
 
@@ -41,9 +41,34 @@ const signupUser = async (req, res) => {
 
 }
 
+//GET a single user detail
+const getUserDetail = async (req, res) => {
+    const user_id = req.user._id
+
+    const users = await User.find({ _id: user_id })
+
+
+    res.status(200).json(users)
+    // const { id } = req.params
+
+    // if(!mongoose.Types.ObjectId.isValid(id)){
+    //     return res.status(404).json({error: 'Unable to find user'})
+        
+    // }
+
+    // const user = await User.findById(id)
+
+    // if(!user){
+    //     return res.status(404).json({error: 'Unable to find user'})
+    // }
+
+    // res.status(200).json(user)
+}
+
 
 module.exports = {
     loginUser,
-    signupUser
+    signupUser,
+    getUserDetail
 }
 
