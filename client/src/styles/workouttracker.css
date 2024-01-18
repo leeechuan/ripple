@@ -17,3 +17,7 @@
     border-radius: 20px;
     padding: var(--space-m)
 }
+
+.workout-detail+.workout-detail{
+    margin-top: var(--space-s)
+}
