@@ -52,21 +52,24 @@ const WorkoutForm = () => {
     return (
         <form className="create workout-create-form" onSubmit={handleSubmit}>
             <h3 className="f-h3-400">Add a New Workout</h3>
-            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            <label className="f-label block mb-2 mt-4">Estimated Calories Burnt:</label>
             <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('title') ? 'error' : '')}
             type="text"
             onChange={(e) => setTitle(e.target.value)}
-            value={title}></input>
-            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            value={title}
+            placeholder="in kcal (e.g 159)"></input>
+            <label className="f-label block mb-2 mt-4">Distance Ran:</label>
             <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('load') ? 'error' : '')}
             type="number"
             onChange={(e) => setLoad(e.target.value)}
-            value={load}></input>
-            <label className="f-label block mb-2 mt-4">Excerise Title:</label>
+            value={load}
+            placeholder="in km (e.g 2.4)"></input>
+            <label className="f-label block mb-2 mt-4">Effective Gym Time:</label>
             <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('reps') ? 'error' : '')}
             type="number"
             onChange={(e) => setReps(e.target.value)}
-            value={reps}></input>
+            value={reps}
+            placeholder="in minutes (e.g 50)"></input>
 
             <button className="btn-primary text-default p-2 mt-6">Add a workout</button>
             {error && <div className="error">{error}</div>}
