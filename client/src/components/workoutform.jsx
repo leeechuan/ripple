@@ -6,9 +6,9 @@ const WorkoutForm = () => {
     
     const { dispatch } = useWorkoutsContext()
 
-    const [title, setTitle] = useState('')
-    const [load, setLoad] = useState('')
-    const [reps, setReps] = useState('')
+    const [calories, setCalories] = useState('')
+    const [distance, setDistance] = useState('')
+    const [duration, setDuration] = useState('')
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
     const { user } = useAuthContext()
@@ -21,7 +21,7 @@ const WorkoutForm = () => {
             return
         }
 
-        const workout = {title, load, reps}
+        const workout = {calories, distance, duration}
 
         const response = await fetch('http://localhost:3001/api/workouts',{
             method: 'POST',
@@ -41,9 +41,9 @@ const WorkoutForm = () => {
         if(response.ok) {
             setError(null)
             setEmptyFields([])
-            setTitle('')
-            setLoad('')
-            setReps('')
+            setCalories('')
+            setDistance('')
+            setDuration('')
             console.log('New workout added:', json)
             dispatch({type: 'CREATE_WORKOUT', payload: json})
         }
@@ -53,22 +53,22 @@ const WorkoutForm = () => {
         <form className="create workout-create-form" onSubmit={handleSubmit}>
             <h3 className="f-h3-400">Add a New Workout</h3>
             <label className="f-label block mb-2 mt-4">Estimated Calories Burnt:</label>
-            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('title') ? 'error' : '')}
-            type="text"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('calories') ? 'error' : '')}
+            type="number"
+            onChange={(e) => setCalories(e.target.value)}
+            value={calories}
             placeholder="in kcal (e.g 159)"></input>
             <label className="f-label block mb-2 mt-4">Distance Ran:</label>
-            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('load') ? 'error' : '')}
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('distance') ? 'error' : '')}
             type="number"
-            onChange={(e) => setLoad(e.target.value)}
-            value={load}
+            onChange={(e) => setDistance(e.target.value)}
+            value={distance}
             placeholder="in km (e.g 2.4)"></input>
             <label className="f-label block mb-2 mt-4">Effective Gym Time:</label>
-            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('reps') ? 'error' : '')}
+            <input className={"input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5 " + (emptyFields.includes('duration') ? 'error' : '')}
             type="number"
-            onChange={(e) => setReps(e.target.value)}
-            value={reps}
+            onChange={(e) => setDuration(e.target.value)}
+            value={duration}
             placeholder="in minutes (e.g 50)"></input>
 
             <button className="btn-primary text-default p-2 mt-6">Add a workout</button>

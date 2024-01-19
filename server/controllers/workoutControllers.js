@@ -1,14 +1,47 @@
 const Workout = require('../models/workoutModel')
 const mongoose = require ('mongoose')
 
-//GET all workouts
+//GET all workouts (this week)
 const getWorkouts = async (req, res) => {
     const user_id = req.user._id
 
-    const workouts = await Workout.find({ user_id }).sort({createdAt: -1})
 
-    res.status(200).json(workouts)
+    // Calculate start and end dates for the current week (Monday to Sunday)
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    const endOfWeek = new Date(today);
+
+    // Set to the first day of the week (Monday)
+    startOfWeek.setDate(today.getDate() - (today.getDay() + 6) % 7);
+
+    // Set to the last day of the week (Sunday)
+    endOfWeek.setDate(today.getDate() + (7 - today.getDay()));
+
+    try {
+        // Find workouts for the current week
+        const workouts = await Workout.find({
+            user_id,
+            createdAt: {
+                $gte: startOfWeek,
+                $lte: endOfWeek,
+            }
+        }).sort({ createdAt: 1 });
+
+        res.status(200).json(workouts);
+    } catch (error) {
+        console.error('Error fetching workouts:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 }
+
+//GET all workouts
+// const getWorkouts = async (req, res) => {
+//     const user_id = req.user._id
+
+//     const workouts = await Workout.find({ user_id }).sort({createdAt: 1})
+
+//     res.status(200).json(workouts)
+// }
 
 //GET a single workout
 const getWorkout = async (req, res) => {
@@ -31,20 +64,20 @@ const getWorkout = async (req, res) => {
 
 //CREATE a new workout
 const createWorkout = async (req, res) => {
-    const {title, load, reps} = req.body
+    const {calories, distance, duration} = req.body
 
     let emptyFields = []
 
-    if(!title) {
-        emptyFields.push('title')
+    if(!calories) {
+        emptyFields.push('calories')
     }
 
-    if(!load) {
-        emptyFields.push('load')
+    if(!distance) {
+        emptyFields.push('distance')
     }
 
-    if(!reps) {
-        emptyFields.push('reps')
+    if(!duration) {
+        emptyFields.push('duration')
     }
 
     if(emptyFields.length > 0) {
@@ -53,7 +86,7 @@ const createWorkout = async (req, res) => {
         
     try {
         const user_id = req.user._id
-        const workout = await Workout.create({title, load, reps, user_id})
+        const workout = await Workout.create({calories, distance, duration, user_id})
         res.status(200).json(workout)
     } catch (error){
         res.status(400).json({error: error.message})
