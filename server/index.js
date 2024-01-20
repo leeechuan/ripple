@@ -43,15 +43,40 @@ app.use('/api/users', userdetailRoutes)
 
 // Connect to DB
 
-mongoose.connect(process.env.MONGO_URI)
+
+const dotenv = require('dotenv');
+dotenv.config();
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Use the appropriate MongoDB URI based on the environment
+const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
+
+// Now use `mongoURI` to connect to the MongoDB database
+mongoose.connect(mongoURI)
     .then(() => {
+        console.log('Connected to MongoDB');
         app.listen(process.env.PORT, () => {
-            console.log('connected and listening on port', process.env.PORT)
-        })
+            console.log('Server is running on port', process.env.PORT);
+        });
     })
-    .catch((error) =>{
-        console.log(error)
-    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+    });
+
+
+
+
+
+// mongoose.connect(process.env.MONGO_URI)
+//     .then(() => {
+//         app.listen(process.env.PORT, () => {
+//             console.log('connected and listening on port', process.env.PORT)
+//         })
+//     })
+//     .catch((error) =>{
+//         console.log(error)
+//     })
 
 
 
