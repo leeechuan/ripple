@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(cors(
     {
-        origin: ["https://ripple-frontend-nine.vercel.app"],
+        origin: ["https://theripplegym.vercel.app/"],
         methods: ["POST", "GET"],
         credentials: true
     }
