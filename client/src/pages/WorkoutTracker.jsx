@@ -15,59 +15,6 @@ import WorkoutDetailTable from '../components/workoutdetailtable'
 const WorkoutTracker = () => {
     
 
-    // const {userdetail, dispatch: userdispatch} = useUserContext()
-    // const {user} = useAuthContext()
-
-    // useEffect(() => {
-
-    //     const fetchUser = async () => {
-    //         const response = await fetch('http://localhost:3001/api/users', {
-    //             headers: {
-    //                 'Authorization': `Bearer ${user.token}`
-    //             }
-    //         })
-    //         const json =await response.json()
-        
-    //         if (response.ok) {
-    //             userdispatch({type: 'GET_USER', payload: json})
-    //         }
-    //         }
-
-    //         if(user) {
-    //             fetchUser()
-    //         } 
-            
-            
-        
-    // }, [userdispatch, user])
-
-
-
-
-    // const {workouts, dispatch: workoutdispatch} = useWorkoutsContext()
-
-
-    // useEffect(() => {
-
-    //     const fetchWorkouts = async () => {
-    //         const response = await fetch('http://localhost:3001/api/workouts', {
-    //             headers: {
-    //                 'Authorization': `Bearer ${user.token}`
-    //             }
-    //         })
-    //         const json =await response.json()
-        
-    //     if (response.ok) {
-    //         workoutdispatch({type: 'SET_WORKOUTS', payload: json})
-    //     }
-    //     }
-
-    //     if(user) {
-    //         fetchWorkouts()
-    //     }
-        
-    // }, [workoutdispatch, user])
-
     const { userdetail, dispatch: userdispatch } = useUserContext();
     const { user } = useAuthContext();
     const { workouts, dispatch: workoutdispatch } = useWorkoutsContext();
