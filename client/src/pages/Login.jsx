@@ -3,7 +3,8 @@ import '../styles/login.css';
 import LoginSpiral from "../scripts/loginspiral.js";
 import { useLogin } from "../hooks/useLogin.js";
 // import Navbar from "../components/Navbar.jsx";
-import { Navigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
 
@@ -23,14 +24,16 @@ function Login(){
         await login(email, password)
     }
 
+    const navigate = useNavigate();
+
     
 
-    // For Redirection to Signup
-    const [goToSignup, setGoToSignup] = React.useState(false)
+    // // For Redirection to Signup
+    // const [goToSignup, setGoToSignup] = React.useState(false)
 
-    if(goToSignup) {
-        return <Navigate to="/signup"></Navigate>;
-    }
+    // if(goToSignup) {
+    //     return <Navigate to="/signup"></Navigate>;
+    // }
 
 
 
@@ -76,7 +79,7 @@ function Login(){
                 <button disabled={isLoading} type="submit" className="w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
                 <p className="f-h6-400 text-default text-center">
                       {"Don't have an account with us? "}
-                    <a onClick={()=> {setGoToSignup(true)}} href="/signup" className="font-medium text-primary-600 underline">Sign up</a>
+                    <a onClick={() => navigate("/signup")} className="font-medium text-primary-600 underline cursor-pointer">Sign up</a>
                 </p>
                 {error && <div className="error">{error}</div>}
             </form>
