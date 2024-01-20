@@ -65,9 +65,6 @@ mongoose.connect(mongoURI)
     });
 
 
-
-
-
 // mongoose.connect(process.env.MONGO_URI)
 //     .then(() => {
 //         app.listen(process.env.PORT, () => {
@@ -77,9 +74,6 @@ mongoose.connect(mongoURI)
 //     .catch((error) =>{
 //         console.log(error)
 //     })
-
-
-
 
 
 // Example for API for future use
