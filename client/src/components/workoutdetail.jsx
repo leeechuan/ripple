@@ -46,7 +46,7 @@ const WorkoutDetail = ({ workout }) => {
 
         
             <tr className="odd:bg-white even:bg-[--secondary-100] border-b last:border-none">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                 <h4 className="">{format(new Date(workout.createdAt),'EEEE')}</h4>
                 </th>
                 <td className="px-6 py-4">
