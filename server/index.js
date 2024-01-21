@@ -19,93 +19,68 @@ app.use(cors(
 ))
 app.use(express.json());
 
-// Connect to vercel
+// // Connect to vercel
 
-// app.use(cors(
-//     {
-//         origin: ["https://theripplegym.vercel.app/"],
-//         methods: ["POST", "GET"],
-//         credentials: true
-//     }
-// ))
+// // app.use(cors(
+// //     {
+// //         origin: ["https://theripplegym.vercel.app/"],
+// //         methods: ["POST", "GET"],
+// //         credentials: true
+// //     }
+// // ))
 
 
-// Middleware
+// // Middleware
 
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
+// app.use((req, res, next) => {
+//     console.log(req.path, req.method)
+//     next()
+// })
+
+
+// // Routes
+
+// app.use('/api/workouts', workoutRoutes)
+// app.use('/api/users', userRoutes)
+// app.use('/api/users', userdetailRoutes)
+
+
+// // Connect to DB
+
+
+// const dotenv = require('dotenv');
+// dotenv.config();
+
+// const isProduction = process.env.NODE_ENV === 'production';
+
+// // Use the appropriate MongoDB URI based on the environment
+// const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
+
+// // Now use `mongoURI` to connect to the MongoDB database
+// mongoose.connect(mongoURI)
+//     .then(() => {
+//         console.log('Connected to MongoDB');
+//         app.listen(process.env.PORT, () => {
+//             console.log('Server is running on port', process.env.PORT);
+//         });
+//     })
+//     .catch((error) => {
+//         console.error('Error connecting to MongoDB:', error);
+//     });
+
+
+//     app.get("/", (req, res) => {
+//         res.json("Hello");
+//     })
+
+
+mongoose.connect('mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/ripple-dev?retryWrites=true&w=majority');
+
+
+app.get("/", (req, res) => {
+    res.json("Hello");
 })
 
-
-// Routes
-
-app.use('/api/workouts', workoutRoutes)
-app.use('/api/users', userRoutes)
-app.use('/api/users', userdetailRoutes)
-
-
-// // CORS handling for OPTIONS requests
-// app.options('*', cors());
-
-
-
-
-// Connect to DB
-
-
-const dotenv = require('dotenv');
-dotenv.config();
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-// Use the appropriate MongoDB URI based on the environment
-const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
-
-// Now use `mongoURI` to connect to the MongoDB database
-mongoose.connect(mongoURI)
-    .then(() => {
-        console.log('Connected to MongoDB');
-        app.listen(process.env.PORT, () => {
-            console.log('Server is running on port', process.env.PORT);
-        });
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
-    });
-
-
-    app.get("/", (req, res) => {
-        res.json("Hello");
-    })
-
-// mongoose.connect(process.env.MONGO_URI)
-//     .then(() => {
-//         app.listen(process.env.PORT, () => {
-//             console.log('connected and listening on port', process.env.PORT)
-//         })
-//     })
-//     .catch((error) =>{
-//         console.log(error)
-//     })
-
-
-// Example for API for future use
-
-
-// app.get("/getUsers", (req, res) => {
-//     UserModel.find({}).then(function(users) {
-//         res.json(users)
-//     }).catch(function(err) {
-//         res.json(err)
-//     })
-// })
-
-// app.post("/createUser", async (req, res) => {
-//     const user = req.body
-//     const newUser = new UserModel(user);
-//     await newUser.save();
-//     res.json(user);
-// })
-
-
+app.listen(3001, () => {
+    console.log("Server is Running")
+})
