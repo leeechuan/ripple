@@ -2,9 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
-const workoutRoutes = require('./routes/workouts.js')
-const userRoutes = require('./routes/users.js')
-const userdetailRoutes = require('./routes/userdetail.js')
+// const workoutRoutes = require('./routes/workouts.js')
+// const userRoutes = require('./routes/users.js')
+// const userdetailRoutes = require('./routes/userdetail.js')
 
 
 // Express app
