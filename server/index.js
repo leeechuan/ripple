@@ -9,14 +9,14 @@ const userdetailRoutes = require('./routes/userdetail.js')
 
 // Express app
 const app = express()
-app.use(cors())
-// app.use(cors(
-//     {
-//         origin: ["*"],
-//         methods: ["POST", "GET"],
-//         credentials: true
-//     }
-// ));
+// app.use(cors())
+app.use(cors(
+    {
+        origin: ["https://theripplegym.vercel.app"],
+        methods: ["POST", "GET"],
+        credentials: true
+    }
+))
 app.use(express.json());
 
 // Connect to vercel
@@ -45,8 +45,8 @@ app.use('/api/users', userRoutes)
 app.use('/api/users', userdetailRoutes)
 
 
-// CORS handling for OPTIONS requests
-app.options('*', cors());
+// // CORS handling for OPTIONS requests
+// app.options('*', cors());
 
 
 
@@ -74,6 +74,10 @@ mongoose.connect(mongoURI)
         console.error('Error connecting to MongoDB:', error);
     });
 
+
+    app.get("/", (req, res) => {
+        res.json("Hello");
+    })
 
 // mongoose.connect(process.env.MONGO_URI)
 //     .then(() => {
