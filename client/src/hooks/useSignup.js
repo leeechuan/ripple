@@ -10,7 +10,7 @@ export const useSignup = () => {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch('https://theripplegym.vercel.app/api/users/signup', {
+        const response = await fetch('https://ripple-backend.vercel.app/api/users/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
