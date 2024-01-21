@@ -22,7 +22,7 @@ const UserDetail = () => {
     useEffect(() => {
     const fetchUser = async () => {
         try {
-        const response = await fetch('http://localhost:3001/api/users', {
+        const response = await fetch('https://ripple-backend.vercel.app/api/users', {
             headers: {
             'Authorization': `Bearer ${user.token}`
             }

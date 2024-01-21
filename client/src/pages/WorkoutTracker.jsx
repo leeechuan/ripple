@@ -24,12 +24,12 @@ const WorkoutTracker = () => {
         const fetchData = async () => {
             try {
                 const [userResponse, workoutsResponse] = await Promise.all([
-                    fetch('http://localhost:3001/api/users', {
+                    fetch('https://ripple-backend.vercel.app/api/users', {
                         headers: {
                             'Authorization': `Bearer ${user.token}`
                         }
                     }),
-                    fetch('http://localhost:3001/api/workouts', {
+                    fetch('https://ripple-backend.vercel.app/api/workouts', {
                         headers: {
                             'Authorization': `Bearer ${user.token}`
                         }
