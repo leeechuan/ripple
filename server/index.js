@@ -72,4 +72,3 @@ mongoose.connect(mongoURI)
     app.get("/", (req, res) => {
         res.json("Hello");
     })
-
