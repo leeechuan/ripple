@@ -14,13 +14,13 @@ app.use(express.json());
 
 // Connect to vercel
 
-app.use(cors(
-    {
-        origin: ["https://theripplegym.vercel.app/"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-))
+// app.use(cors(
+//     {
+//         origin: ["https://theripplegym.vercel.app/"],
+//         methods: ["POST", "GET"],
+//         credentials: true
+//     }
+// ))
 
 
 // Middleware
