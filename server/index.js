@@ -2,9 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
-// const workoutRoutes = require('./routes/workouts.js')
-// const userRoutes = require('./routes/users.js')
-// const userdetailRoutes = require('./routes/userdetail.js')
+const workoutRoutes = require('./routes/workouts.js')
+const userRoutes = require('./routes/users.js')
+const userdetailRoutes = require('./routes/userdetail.js')
 
 
 // Express app
@@ -32,58 +32,58 @@ app.use(express.json());
 
 // // Middleware
 
-// app.use((req, res, next) => {
-//     console.log(req.path, req.method)
-//     next()
-// })
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
 
 
 // // Routes
 
-// app.use('/api/workouts', workoutRoutes)
-// app.use('/api/users', userRoutes)
-// app.use('/api/users', userdetailRoutes)
+app.use('/api/workouts', workoutRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/users', userdetailRoutes)
 
 
 // // Connect to DB
 
 
-// const dotenv = require('dotenv');
-// dotenv.config();
+const dotenv = require('dotenv');
+dotenv.config();
 
-// const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'production';
 
-// // Use the appropriate MongoDB URI based on the environment
-// const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
+// Use the appropriate MongoDB URI based on the environment
+const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
 
-// // Now use `mongoURI` to connect to the MongoDB database
-// mongoose.connect(mongoURI)
-//     .then(() => {
-//         console.log('Connected to MongoDB');
-//         app.listen(process.env.PORT, () => {
-//             console.log('Server is running on port', process.env.PORT);
-//         });
-//     })
-//     .catch((error) => {
-//         console.error('Error connecting to MongoDB:', error);
-//     });
-
-
-//     app.get("/", (req, res) => {
-//         res.json("Hello");
-//     })
+// Now use `mongoURI` to connect to the MongoDB database
+mongoose.connect(mongoURI)
+    .then(() => {
+        console.log('Connected to MongoDB');
+        app.listen(process.env.PORT, () => {
+            console.log('Server is running on port', process.env.PORT);
+        });
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 
 
-mongoose.connect('mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/ripple-dev?retryWrites=true&w=majority');
+    app.get("/", (req, res) => {
+        res.json("Hello");
+    })
 
 
-app.get("/", (req, res) => {
-    res.json("Hello");
-})
+// mongoose.connect('mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/ripple-dev?retryWrites=true&w=majority');
 
-app.listen(3001, () => {
-    console.log("Server is Running")
-})
+
+// app.get("/", (req, res) => {
+//     res.json("Hello");
+// })
+
+// app.listen(3001, () => {
+//     console.log("Server is Running")
+// })
 
 
 
