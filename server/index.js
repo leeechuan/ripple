@@ -12,7 +12,7 @@ const app = express()
 // app.use(cors())
 app.use(cors(
     {
-        origin: ["https://theripplegym.vercel.app"],
+        origin: ["*"],
         methods: ["POST", "GET"],
         credentials: true
     }
