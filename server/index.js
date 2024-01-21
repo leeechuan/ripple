@@ -9,14 +9,14 @@ const userdetailRoutes = require('./routes/userdetail.js')
 
 // Express app
 const app = express()
-// app.use(cors())
-app.use(cors(
-    {
-        origin: ["*"],
-        methods: ["POST", "GET"],
-        credentials: true
-    }
-));
+app.use(cors())
+// app.use(cors(
+//     {
+//         origin: ["*"],
+//         methods: ["POST", "GET"],
+//         credentials: true
+//     }
+// ));
 app.use(express.json());
 
 // Connect to vercel
@@ -44,6 +44,9 @@ app.use('/api/workouts', workoutRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/users', userdetailRoutes)
 
+
+// CORS handling for OPTIONS requests
+app.options('*', cors());
 
 
 
