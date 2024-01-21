@@ -13,7 +13,7 @@ const app = express()
 app.use(cors(
     {
         origin: ["https://theripplegym.vercel.app"],
-        methods: ["POST", "GET"],
+        methods: ["POST", "GET", "DELETE", "PATCH"],
         credentials: true
     }
 ))
@@ -73,62 +73,3 @@ mongoose.connect(mongoURI)
         res.json("Hello");
     })
 
-
-// mongoose.connect('mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/ripple-dev?retryWrites=true&w=majority');
-
-
-// app.get("/", (req, res) => {
-//     res.json("Hello");
-// })
-
-
-// app.listen(3001, () => {
-//     console.log("Server is Running")
-// })
-
-
-
-
-
-
-
-
-// const express = require('express')
-// const mongoose = require('mongoose')
-// const cors = require('cors')
-// // const RegisterModel = require('./models/Register')
-
-// const app = express()
-// app.use(cors(
-//     {
-//         origin: ["https://deploy-mern-test-frontend.vercel.app"],
-//         methods: ["POST", "GET"],
-//         credentials: true
-//     }
-// ));
-// app.use(express.json())
-
-// mongoose.connect('mongodb+srv://ripple-admin:ekbTnCPS2H3jmHmj@ripplecluster.etrdyxs.mongodb.net/corstesting?retryWrites=true&w=majority');
-
-
-// app.get("/", (req, res) => {
-//     res.json("Hello");
-// })
-// // app.post('/register', (req, res) => {
-// //     const {name, email, password} = req.body;
-// //     RegisterModel.findOne({email: email})
-// //     .then(user => {
-// //         if(user) {
-// //             res.json("Already have an account")
-// //         } else {
-// //             RegisterModel.create({name: name, email: email, password: password})
-// //             .then(result => res.json(result))
-// //             .catch(err => res.json(err))
-// //         }
-// //     }).catch(err => res.json(err))
-// // })
-
-
-// app.listen(3001, () => {
-//     console.log("Server is Running")
-// })
