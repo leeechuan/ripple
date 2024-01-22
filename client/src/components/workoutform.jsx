@@ -23,7 +23,7 @@ const WorkoutForm = () => {
 
         const workout = {calories, distance, duration}
 
-        const response = await fetch('https://ripple-backend.vercel.app/api/workouts',{
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/workouts`,{
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {

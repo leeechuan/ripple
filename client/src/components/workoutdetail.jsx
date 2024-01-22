@@ -15,7 +15,7 @@ const WorkoutDetail = ({ workout }) => {
             return
         }
 
-        const response = await fetch('https://ripple-backend.vercel.app/api/workouts/' + workout._id, {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/workouts/` + workout._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`
