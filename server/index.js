@@ -12,7 +12,7 @@ const app = express()
 // app.use(cors())
 app.use(cors(
     {
-        origin: ["https://theripplegym.vercel.app"],
+        origin: ["https://theripplegym.vercel.app","http://localhost:5173"],
         methods: ["POST", "GET", "DELETE", "PATCH"],
         credentials: true
     }
