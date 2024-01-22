@@ -1,7 +1,10 @@
 const Workout = require('../models/workoutModel')
 const mongoose = require ('mongoose')
 
-//GET all workouts (this week)
+
+const { startOfDay } = require('date-fns')
+
+// //GET all workouts (this week)
 const getWorkouts = async (req, res) => {
     const user_id = req.user._id
 
@@ -11,11 +14,13 @@ const getWorkouts = async (req, res) => {
     const startOfWeek = new Date(today);
     const endOfWeek = new Date(today);
 
-    // Set to the first day of the week (Monday)
+    // // Set to the first day of the week (Monday UTC+8)
     startOfWeek.setDate(today.getDate() - (today.getDay() + 6) % 7);
+    startOfWeek.setHours(0, 0, 0, 0); // Set to midnight (00:00:00.000) local time
 
-    // Set to the last day of the week (Sunday)
+    // // Set to the last day of the week (Sunday UTC+8)
     endOfWeek.setDate(today.getDate() + (7 - today.getDay()));
+    endOfWeek.setHours(23, 59, 59, 999); // Set to 23:59:59.999 (11:59:59.999 PM) local time
 
     try {
         // Find workouts for the current week
