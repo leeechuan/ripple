@@ -76,7 +76,7 @@ const updateUserDetail = async (req, res) => {
 
     const user = await User.findOneAndUpdate({_id: id}, {
         ...req.body
-        })
+        }, {new: true})
 
     if(!user){
         return res.status(404).json({error: 'No such user'})
