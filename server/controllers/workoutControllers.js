@@ -2,10 +2,8 @@ const Workout = require('../models/workoutModel')
 const mongoose = require ('mongoose')
 
 
-const { startOfDay } = require('date-fns')
-
 // //GET all workouts (this week)
-const getWorkouts = async (req, res) => {
+    const getWorkouts = async (req, res) => {
     const user_id = req.user._id
 
 

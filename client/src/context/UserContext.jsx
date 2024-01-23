@@ -12,6 +12,10 @@ export const userReducer = (state,action) => {
                 // userdetail: action.payload
                 ...state, userdetail: action.payload
             }
+        case 'UPDATE_USER':
+            return{
+                user: [action.payload, ...state.user]
+            }
         // case 'CREATE_WORKOUT':
         //     return {
         //         workouts: [action.payload, ...state.workouts]

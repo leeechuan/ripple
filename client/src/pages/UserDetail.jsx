@@ -46,6 +46,52 @@ const UserDetail = () => {
         }, [dispatch, user]);
 
 
+
+
+
+        const [name, setName] = useState('')
+        const [email, setEmail] = useState('')
+        const [error, setError] = useState(null)
+        const [emptyFields, setEmptyFields] = useState([])
+    
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+    
+            if(!user){
+                setError('You must be logged in')
+                return
+            }
+    
+            const userdetail = {name, email}
+    
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`,{
+                method: 'UPDATE',
+                body: JSON.stringify(userdetail),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+    
+            const json = await response.json()
+    
+            if(!response.ok) {
+                setError(json.error)
+                setEmptyFields(json.emptyFields)
+            }
+            if(response.ok) {
+                setError(null)
+                setEmptyFields([])
+                console.log('User updated:', json)
+                dispatch({type: 'UPDATE_USER', payload: json})
+            }
+        }
+
+
+
+
+
+
         const [isEditMode, setIsEditMode] = useState(false);
         const [editedName, setEditedName] = useState(user ? user.name : '');
         const [editedEmail, setEditedEmail] = useState(user ? user.email : '');
@@ -57,6 +103,7 @@ const UserDetail = () => {
         const handleSave = () => {
             // Perform save logic here, update user details on the server if needed
             // For now, just toggle back to view mode
+            handleSubmit()
             setIsEditMode(false);
         };
 
@@ -132,11 +179,20 @@ const UserDetail = () => {
                             ) : (
                                 <div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Name</label>
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setName(e.target.value)}
+                                        value={name}>
+                                        Name
+                                        </label>
+                                        
                                         <p className="text-md text-gray-800">{editedName}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Email</label>
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={email}>
+                                        Email
+                                        </label>
                                         <p className="text-md text-gray-800">{editedEmail}</p>
                                     </div>
                                     {/* Add more non-editable user details as needed */}
@@ -149,6 +205,7 @@ const UserDetail = () => {
                                 </div>
                             )}
                         </div>
+                        {error && <div className="error">{error}</div>}
                     </div>
                 </div>
             </div>
