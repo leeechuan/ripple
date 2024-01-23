@@ -33,19 +33,19 @@ const userSchema = new mongoose.Schema({
         },
         required: false
     },
-    Name: {
+    name: {
         type: String,
         required: false
     },
-    Nationality: {
+    nationality: {
         type: String,
         required: false
     },
-    Address: {
+    address: {
         type: String,
         required: false
     },
-    HomeClub: {
+    homeClub: {
         type: String,
         required: false
     },
