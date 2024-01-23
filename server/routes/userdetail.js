@@ -1,7 +1,8 @@
 const express = require('express')
 
 const {
-    getUserDetail
+    getUserDetail,
+    updateUserDetail
 } = require('../controllers/userControllers')
 
 const requireAuth = require('../middleware/requireAuth')
@@ -14,6 +15,9 @@ router.use(requireAuth)
 
 // GET user detail
 router.get('/', getUserDetail)
+
+// UPDATE a user detail
+router.patch('/:id', updateUserDetail)
 
 
 module.exports = router
