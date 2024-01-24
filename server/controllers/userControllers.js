@@ -67,23 +67,50 @@ const getUserDetail = async (req, res) => {
 
 //UPDATE a user detail
 const updateUserDetail = async (req, res) => {
-    const { id } = req.params
+    // const { id } = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such user'})
+    // if(!mongoose.Types.ObjectId.isValid(id)){
+    //     return res.status(404).json({error: 'No such user'})
         
+    // }
+
+    const user = await User.findById(req.user._id);
+
+    if(user){
+        user.name = req.body.name || user.name
+        // user.nationality = req.body.nationality || user.nationality
+        user.email = req.body.email || user.email
+
+        if(req.body.password){
+            user.password = req.body.password
+        }
+
+        const updatedUser = await user.save()
+
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            // token: createToken(updatedUser._id)
+        });
+    } else {
+        res.statue(404);
+        throw new Error("User not found")
     }
 
-    const user = await User.findOneAndUpdate({_id: id}, {
-        ...req.body
-        }, {new: true})
 
-    if(!user){
-        return res.status(404).json({error: 'No such user'})
-    }
-
-    res.status(200).json(user)
 }
+
+    // const user = await User.findOneAndUpdate({_id: id}, {
+    //     ...req.body
+    //     }, {new: true})
+
+    // if(!user){
+    //     return res.status(404).json({error: 'No such user'})
+    // }
+
+    // res.status(200).json(user)
+
 
 
 
