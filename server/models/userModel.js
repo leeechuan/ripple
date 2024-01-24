@@ -3,6 +3,22 @@ const bcrypt = require('bcryptjs')
 const validator = require('validator')
 
 const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: false
+    },
+    nationality: {
+        type: String,
+        required: false
+    },
+    address: {
+        type: String,
+        required: false
+    },
+    homeClub: {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
         required: true,
@@ -32,23 +48,7 @@ const userSchema = new mongoose.Schema({
             }
         },
         required: false
-    },
-    name: {
-        type: String,
-        required: false
-    },
-    nationality: {
-        type: String,
-        required: false
-    },
-    address: {
-        type: String,
-        required: false
-    },
-    homeClub: {
-        type: String,
-        required: false
-    },
+    }
 
 })
 

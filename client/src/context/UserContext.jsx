@@ -10,11 +10,12 @@ export const userReducer = (state,action) => {
             return {
                 // user: state.user.filter((w) => w._id !== action.payload._id)
                 // userdetail: action.payload
-                ...state, userdetail: action.payload
+                ...state, user: action.payload
             }
         case 'UPDATE_USER':
             return{
-                user: [action.payload, ...state.user]
+                ...state, user: action.payload
+                // user: [action.payload, ...state]
             }
         // case 'CREATE_WORKOUT':
         //     return {
@@ -31,7 +32,7 @@ export const userReducer = (state,action) => {
 
 export const UserContextProvider = ( {children} ) => {
     const [state, dispatch] = useReducer(userReducer, {
-        userdetail: null
+        user: null
     })
 
 

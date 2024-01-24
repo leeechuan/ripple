@@ -19,6 +19,10 @@ const UserDetail = () => {
     const { dispatch } = useUserContext();
     const { user } = useAuthContext();
 
+    // const { state: userState, dispatch: userDispatch } = useUserContext();
+    // const { state: user, dispatch: authDispatch } = useAuthContext();
+
+
     useEffect(() => {
     const fetchUser = async () => {
         try {
@@ -30,7 +34,9 @@ const UserDetail = () => {
 
         if (response.ok) {
             const json = await response.json();
-            dispatch({ type: 'GET_USER', payload: json });
+            dispatch({ type: 'GET_USER', payload: json })
+            // authDispatch({ type: 'GET_USER', payload: json });
+            // userDispatch({ type: 'GET_USER', payload: json });
         } else {
             // Handle error scenarios
             console.error('Error fetching user:', response.statusText);
@@ -45,17 +51,17 @@ const UserDetail = () => {
         
         }, [dispatch, user]);
 
+        // dispatch
 
 
-
-
-        const [name, setName] = useState('')
-        const [email, setEmail] = useState('')
+        const [name, setName] = useState(user ? user.name : '')
+        const [email, setEmail] = useState(user ? user.email : '')
         const [error, setError] = useState(null)
         const [emptyFields, setEmptyFields] = useState([])
+
     
-        const handleSubmit = async (e) => {
-            e.preventDefault()
+        const handleSubmit = async () => {
+            // e.preventDefault()
     
             if(!user){
                 setError('You must be logged in')
@@ -64,8 +70,8 @@ const UserDetail = () => {
     
             const userdetail = {name, email}
     
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`,{
-                method: 'UPDATE',
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/`,{
+                method: 'PATCH',
                 body: JSON.stringify(userdetail),
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,12 +95,9 @@ const UserDetail = () => {
 
 
 
-
-
-
         const [isEditMode, setIsEditMode] = useState(false);
-        const [editedName, setEditedName] = useState(user ? user.name : '');
-        const [editedEmail, setEditedEmail] = useState(user ? user.email : '');
+        // const [editedName, setEditedName] = useState(user ? user.name : '');
+        // const [editedEmail, setEditedEmail] = useState(user ? user.email : '');
     
         const handleEditToggle = () => {
             setIsEditMode(!isEditMode);
@@ -103,39 +106,14 @@ const UserDetail = () => {
         const handleSave = () => {
             // Perform save logic here, update user details on the server if needed
             // For now, just toggle back to view mode
-            handleSubmit()
+            handleSubmit(name, email)
             setIsEditMode(false);
         };
 
 
 
     return (
-        // <div className="home">
-        //     <Navbar></Navbar>
-        //     <div className='userdetail-page'>
-        //         <div className="min-h-screen bg-gray-100">
-        //             <div className="max-w-3xl mx-auto mt-8 p-8 bg-white shadow-md rounded-md">
-        //                 <h1 className="text-2xl font-semibold mb-4">User Details</h1>
-        //                     {user ? (
-        //                     <div>
-        //                         <div className="mb-4">
-        //                         <label className="block text-sm font-medium text-gray-600">Name</label>
-        //                         <p className="text-md text-gray-800">{"John Doe"}</p>
-        //                         </div>
-        //                         <div className="mb-4">
-        //                         <label className="block text-sm font-medium text-gray-600">Email</label>
-        //                         <p className="text-md text-gray-800">{user.email}</p>
-        //                         </div>
-        //                         {/* Add more user details as needed */}
-        //                     </div>
-        //                     ) : (
-        //                     <p className="text-gray-600">Loading user details...</p>
-        //                     )}
-        //             </div>
-        //         </div>
-        //     </div>
 
-        // </div>
                 <div className="home">
                 <Navbar></Navbar>
                 <div className='userdetail-page'>
@@ -148,8 +126,8 @@ const UserDetail = () => {
                                         <label className="block text-sm font-medium text-gray-600">Name</label>
                                         <input
                                             type="text"
-                                            value={editedName}
-                                            onChange={(e) => setEditedName(e.target.value)}
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
                                             className="text-md text-gray-800 border rounded-md p-2 w-full"
                                         />
                                     </div>
@@ -157,8 +135,8 @@ const UserDetail = () => {
                                         <label className="block text-sm font-medium text-gray-600">Email</label>
                                         <input
                                             type="text"
-                                            value={editedEmail}
-                                            onChange={(e) => setEditedEmail(e.target.value)}
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             className="text-md text-gray-800 border rounded-md p-2 w-full"
                                         />
                                     </div>
@@ -185,7 +163,7 @@ const UserDetail = () => {
                                         Name
                                         </label>
                                         
-                                        <p className="text-md text-gray-800">{editedName}</p>
+                                        <p className="text-md text-gray-800">{name}</p>
                                     </div>
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-600"
@@ -193,7 +171,7 @@ const UserDetail = () => {
                                         value={email}>
                                         Email
                                         </label>
-                                        <p className="text-md text-gray-800">{editedEmail}</p>
+                                        <p className="text-md text-gray-800">{email}</p>
                                     </div>
                                     {/* Add more non-editable user details as needed */}
                                     <button

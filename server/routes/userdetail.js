@@ -17,7 +17,7 @@ router.use(requireAuth)
 router.get('/', getUserDetail)
 
 // UPDATE a user detail
-router.patch('/:id', updateUserDetail)
+router.patch('/', updateUserDetail)
 
 
 module.exports = router
