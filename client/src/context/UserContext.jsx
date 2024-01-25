@@ -13,7 +13,6 @@ export const userReducer = (state,action) => {
                 ...state, user: action.payload
             }
         case 'UPDATE_USER':
-            console.log(action.payload)
             return{
                 ...state, user: action.payload
                 // user: [action.payload, ...state]

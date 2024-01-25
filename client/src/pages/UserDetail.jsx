@@ -14,102 +14,131 @@ import Navbar from '../components/Navbar'
 
 
 const UserDetail = () => {
-    
-    const { dispatch } = useUserContext();
+
     const { user } = useAuthContext();
-
-    // const { state: userState, dispatch: userDispatch } = useUserContext();
-    // const { state: user, dispatch: authDispatch } = useAuthContext();
-
-
+    const { dispatch: userDispatch } = useUserContext();
+  
+    const [firstname, setFirstName] = useState(user ? user.firstname : '');
+    const [lastname, setLastName] = useState(user ? user.lastname : '');
+    const [gender, setGender] = useState(user ? user.gender : '');
+    const [email, setEmail] = useState(user ? user.email : '');
+    const [dateofbirth, setDateOfBirth] = useState(user ? user.dateofbirth : '');
+    const [nationality, setNationality] = useState(user ? user.nationality : '');
+    const [emergencycontactname, setEmergencyContactName] = useState(user ? user.emergencycontactname : '');
+    const [emergencycontactnumber, setEmergencyContactNumber] = useState(user ? user.emergencycontactnumber : '');
+    const [mobilenumber, setMobileNumber] = useState(user ? user.mobilenumber : '');
+    const [homenumber, setHomeNumber] = useState(user ? user.homenumber : '');
+    const [goals, setGoals] = useState({
+      calories: user && user.goals ? user.goals.calories : 0, 
+      distance: user && user.goals ? user.goals.distance : 0,
+      duration: user && user.goals ? user.goals.duration : 0
+    });
+    const [error, setError] = useState(null);
+    // eslint-disable-next-line no-unused-vars
+    const [emptyFields, setEmptyFields] = useState([]);
+    const [isEditMode, setIsEditMode] = useState(false);
+  
     useEffect(() => {
-    const fetchUser = async () => {
-        console.log("render")
+      const fetchUser = async () => {
         try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
+          const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
             headers: {
-            'Authorization': `Bearer ${user.token}`
+              'Authorization': `Bearer ${user.token}`
             }
-        });
-
-        if (response.ok) {
+          });
+  
+          if (response.ok) {
             const json = await response.json();
-            dispatch({ type: 'GET_USER', payload: json })
-            // authDispatch({ type: 'GET_USER', payload: json });
-            // userDispatch({ type: 'GET_USER', payload: json });
-        } else {
-            // Handle error scenarios
-            console.error('Error fetching user:', response.statusText);
-        }
-        } catch (error) {
-        // Handle network or other errors
-        console.error('Error fetching user:', error);
-        }
-        };  if (user) {
-            fetchUser();
-        }
-        
-        }, [dispatch, user]);
-
-        // dispatch
+            userDispatch({ type: 'GET_USER', payload: json });
 
 
-        const [name, setName] = useState(user ? user.name : '')
-        const [email, setEmail] = useState(user ? user.email : '')
-        const [error, setError] = useState(null)
-        const [emptyFields, setEmptyFields] = useState([])
-
-    
-        const handleSubmit = async () => {
-            // e.preventDefault()
-    
-            if(!user){
-                setError('You must be logged in')
-                return
-            }
-    
-            const userdetail = {name, email}
-    
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/`,{
-                method: 'PATCH',
-                body: JSON.stringify(userdetail),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${user.token}`
-                }
+            //Update States
+            setFirstName(json[0].firstname)
+            setLastName(json[0].lastname)
+            setGender(json[0].gender)
+            setEmail(json[0].email)
+            setDateOfBirth(json[0].dateofbirth)
+            setNationality(json[0].nationality)
+            setEmergencyContactName(json[0].emergencycontactname)
+            setEmergencyContactNumber(json[0].emergencycontactnumber)
+            setMobileNumber(json[0].mobilenumber)
+            setHomeNumber(json[0].homenumber)
+            setGoals({
+              calories: json[0]?.goals?.calories || 0,
+              distance: json[0]?.goals?.distance || 0,
+              duration: json[0]?.goals?.duration || 0
             })
-    
-            const json = await response.json()
-    
-            if(!response.ok) {
-                setError(json.error)
-                setEmptyFields(json.emptyFields)
-            }
-            if(response.ok) {
-                setError(null)
-                setEmptyFields([])
-                console.log('User updated:', json)
-                dispatch({type: 'UPDATE_USER', payload: json})
-            }
+
+
+          } else {
+            console.error('Error fetching user:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error fetching user:', error);
         }
+      };
+  
+      if (user) {
+        fetchUser();
+      }
+    }, [user, userDispatch]);
+  
+    const handleSubmit = async () => {
+      if (!user) {
+        setError('You must be logged in');
+        return;
+      }
+  
+      const userDetail = { 
+        firstname,
+        lastname,
+        gender,
+        email,
+        dateofbirth,
+        nationality,
+        emergencycontactname,
+        emergencycontactnumber,
+        mobilenumber,
+        homenumber,
+        goals
+       };
+  
+      try {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/`, {
+          method: 'PATCH',
+          body: JSON.stringify(userDetail),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+  
+        const json = await response.json();
+  
+        if (!response.ok) {
+          setError(json.error);
+          setEmptyFields(json.emptyFields);
+        } else {
+          setError(null);
+          setEmptyFields([]);
+          console.log('User updated:', json);
+          userDispatch({ type: 'UPDATE_USER', payload: json });
+        }
+      } catch (error) {
+        console.error('Error updating user:', error);
+      }
+    };
+  
+    const handleEditToggle = () => {
+      setIsEditMode(!isEditMode);
+    };
+  
+    const handleSave = () => {
+      handleSubmit();
+      setIsEditMode(false);
+    };
 
-
-
-        const [isEditMode, setIsEditMode] = useState(false);
-        // const [editedName, setEditedName] = useState(user ? user.name : '');
-        // const [editedEmail, setEditedEmail] = useState(user ? user.email : '');
     
-        const handleEditToggle = () => {
-            setIsEditMode(!isEditMode);
-        };
-    
-        const handleSave = () => {
-            // Perform save logic here, update user details on the server if needed
-            // For now, just toggle back to view mode
-            handleSubmit(name, email)
-            setIsEditMode(false);
-        };
-
     return (
 
                 <div className="home">
@@ -121,11 +150,29 @@ const UserDetail = () => {
                             {isEditMode ? (
                                 <div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Name</label>
+                                        <label className="block text-sm font-medium text-gray-600">First Name</label>
                                         <input
                                             type="text"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
+                                            value={firstname}
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Last Name</label>
+                                        <input
+                                            type="text"
+                                            value={lastname}
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Gender</label>
+                                        <input
+                                            type="text"
+                                            value={gender}
+                                            onChange={(e) => setGender(e.target.value)}
                                             className="text-md text-gray-800 border rounded-md p-2 w-full"
                                         />
                                     </div>
@@ -138,7 +185,87 @@ const UserDetail = () => {
                                             className="text-md text-gray-800 border rounded-md p-2 w-full"
                                         />
                                     </div>
-                                    {/* Add more editable user details as needed */}
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Date Of Birth</label>
+                                        <input
+                                            type="text"
+                                            value={dateofbirth}
+                                            onChange={(e) => setDateOfBirth(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Nationality</label>
+                                        <input
+                                            type="text"
+                                            value={nationality}
+                                            onChange={(e) => setNationality(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Emergency Contact Name</label>
+                                        <input
+                                            type="text"
+                                            value={emergencycontactname}
+                                            onChange={(e) => setEmergencyContactName(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Emergency Contact Number</label>
+                                        <input
+                                            type="text"
+                                            value={emergencycontactnumber}
+                                            onChange={(e) => setEmergencyContactNumber(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Mobile Number</label>
+                                        <input
+                                            type="text"
+                                            value={mobilenumber}
+                                            onChange={(e) => setMobileNumber(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Home Number</label>
+                                        <input
+                                            type="text"
+                                            value={homenumber}
+                                            onChange={(e) => setHomeNumber(e.target.value)}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Calories</label>
+                                        <input
+                                            type="text"
+                                            value={goals.calories}
+                                            onChange={(e) => setGoals({...goals, calories: e.target.value})}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Distance</label>
+                                        <input
+                                            type="text"
+                                            value={goals.distance}
+                                            onChange={(e) => setGoals({...goals, distance: e.target.value})}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600">Duration</label>
+                                        <input
+                                            type="text"
+                                            value={goals.duration}
+                                            onChange={(e) => setGoals({...goals, duration: e.target.value})}
+                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                        />
+                                    </div>
                                     <button
                                         onClick={handleSave}
                                         className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
@@ -153,15 +280,32 @@ const UserDetail = () => {
                                     </button>
                                 </div>
                             ) : (
+
+                              // Not editable section
                                 <div>
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-600"
-                                        onChange={(e) => setName(e.target.value)}
-                                        value={name}>
-                                        Name
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                        value={firstname}>
+                                        First Name
                                         </label>
-                                        
-                                        <p className="text-md text-gray-800">{name}</p>
+                                        <p className="text-md text-gray-800">{firstname}</p>
+                                    </div>                          
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setLastName(e.target.value)}
+                                        value={lastname}>
+                                        Last Name
+                                        </label>
+                                        <p className="text-md text-gray-800">{lastname}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setGender(e.target.value)}
+                                        value={gender}>
+                                        Gender
+                                        </label>
+                                        <p className="text-md text-gray-800">{gender}</p>
                                     </div>
                                     <div className="mb-4">
                                         <label className="block text-sm font-medium text-gray-600"
@@ -170,8 +314,79 @@ const UserDetail = () => {
                                         Email
                                         </label>
                                         <p className="text-md text-gray-800">{email}</p>
+                                    </div>                              
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setDateOfBirth(e.target.value)}
+                                        value={dateofbirth}>
+                                        Date Of Birth
+                                        </label>
+                                        <p className="text-md text-gray-800">{dateofbirth}</p>
                                     </div>
-                                    {/* Add more non-editable user details as needed */}
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setNationality(e.target.value)}
+                                        value={nationality}>
+                                        Nationality
+                                        </label>
+                                        <p className="text-md text-gray-800">{nationality}</p>
+                                    </div>                          
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setEmergencyContactName(e.target.value)}
+                                        value={emergencycontactname}>
+                                        Emergency Contact Name
+                                        </label>
+                                        <p className="text-md text-gray-800">{emergencycontactname}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setEmergencyContactNumber(e.target.value)}
+                                        value={emergencycontactnumber}>
+                                        Emergency Contact Number
+                                        </label>
+                                        <p className="text-md text-gray-800">{emergencycontactnumber}</p>
+                                    </div>                       
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setMobileNumber(e.target.value)}
+                                        value={mobilenumber}>
+                                        Mobile Number
+                                        </label>
+                                        <p className="text-md text-gray-800">{mobilenumber}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setHomeNumber(e.target.value)}
+                                        value={homenumber}>
+                                        Home Number
+                                        </label>
+                                        <p className="text-md text-gray-800">{homenumber}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setGoals({...goals, calories: e.target.value})}
+                                        value={goals.calories}>
+                                        Calories
+                                        </label>
+                                        <p className="text-md text-gray-800">{goals.calories}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setGoals({...goals, distance: e.target.value})}
+                                        value={goals.distance}>
+                                        Distance
+                                        </label>
+                                        <p className="text-md text-gray-800">{goals.distance}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-600"
+                                        onChange={(e) => setGoals({...goals, duration: e.target.value})}
+                                        value={goals.duration}>
+                                        Duration
+                                        </label>
+                                        <p className="text-md text-gray-800">{goals.duration}</p>
+                                    </div>
                                     <button
                                         onClick={handleEditToggle}
                                         className="bg-blue-500 text-white py-2 px-4 rounded-md"

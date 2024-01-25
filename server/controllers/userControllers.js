@@ -77,9 +77,17 @@ const updateUserDetail = async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if(user){
-        user.name = req.body.name || user.name
-        // user.nationality = req.body.nationality || user.nationality
+        user.firstname = req.body.firstname || user.firstname
+        user.lastname = req.body.lastname || user.lastname
+        user.gender = req.body.gender || user.gender
         user.email = req.body.email || user.email
+        user.dateofbirth = req.body.dateofbirth || user.dateofbirth
+        user.nationality = req.body.nationality || user.nationality
+        user.emergencycontactname = req.body.emergencycontactname || user.emergencycontactname
+        user.emergencycontactnumber = req.body.emergencycontactnumber || user.emergencycontactnumber
+        user.mobilenumber = req.body.mobilenumber || user.mobilenumber
+        user.homenumber = req.body.homenumber || user.homenumber
+        user.goals = req.body.goals || user.goals
 
         if(req.body.password){
             user.password = req.body.password
@@ -89,8 +97,17 @@ const updateUserDetail = async (req, res) => {
 
         res.json({
             _id: updatedUser._id,
-            name: updatedUser.name,
+            firstname: updatedUser.firstname,
+            lastname: updatedUser.lastname,
+            gender: updatedUser.gender,
             email: updatedUser.email,
+            dateofbirth: updatedUser.dateofbirth,
+            nationality: updatedUser.nationality,
+            emergencycontactname: updatedUser.emergencycontactname,
+            emergencycontactnumber: updatedUser.emergencycontactnumber,
+            mobilenumber: updatedUser.mobilenumber,
+            homenumber: updatedUser.homenumber,
+            goals: updatedUser.goals
             // token: createToken(updatedUser._id)
         });
     } else {

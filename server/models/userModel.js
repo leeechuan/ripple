@@ -3,19 +3,15 @@ const bcrypt = require('bcryptjs')
 const validator = require('validator')
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstname: {
         type: String,
         required: false
     },
-    nationality: {
+    lastname: {
         type: String,
         required: false
     },
-    address: {
-        type: String,
-        required: false
-    },
-    homeClub: {
+    gender: {
         type: String,
         required: false
     },
@@ -23,14 +19,34 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },    
+    dateofbirth:{
+        type: String,
+        required: false
+    },
+    nationality: {
+        type: String,
+        required: false
+    },
+    emergencycontactname: {
+        type: String,
+        required: false
+    },
+    emergencycontactnumber: {
+        type: String,
+        required: false
+    },
+    mobilenumber: {
+        type: String,
+        required: false
+    },
+    homenumber: {
+        type: String,
+        required: false
     },
     password: {
         type: String,
         required: true
-    },
-    age: {
-        type: Number,
-        required: false
     },
     goals: {
         type: {
