@@ -10,7 +10,9 @@ export const userReducer = (state,action) => {
             return {
                 // user: state.user.filter((w) => w._id !== action.payload._id)
                 // userdetail: action.payload
-                ...state, user: action.payload
+                ...state, 
+                user: action.payload,
+                userdetail: action.payload
             }
         case 'UPDATE_USER':
             return{

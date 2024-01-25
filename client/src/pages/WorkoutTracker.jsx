@@ -22,6 +22,7 @@ const WorkoutTracker = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            console.log(userdetail, "--userdetail")
             try {
                 const [userResponse, workoutsResponse] = await Promise.all([
                     fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
@@ -41,6 +42,7 @@ const WorkoutTracker = () => {
 
                 if (userResponse.ok) {
                     userdispatch({ type: 'GET_USER', payload: userJson });
+                    console.log(userJson,"--userjson")
                 }
 
                 if (workoutsResponse.ok) {
@@ -57,7 +59,11 @@ const WorkoutTracker = () => {
         if (user && isLoading) {
             fetchData();
         }
-    }, [userdispatch, workoutdispatch, user, isLoading]);
+    }, [userdispatch, workoutdispatch, user, isLoading, userdetail]);
+
+    useEffect(() =>{
+        console.log(userdetail, "--userdetail after dispatch")
+    },[userdetail])
 
 
 
@@ -108,7 +114,7 @@ const WorkoutTracker = () => {
             <div className='workout-page'>
                 <div className='weekly-goal-rings'>
 
-                {userdetail && userdetail.length > 0 && (
+                {/* {userdetail && userdetail.length > 0 && ( */}
                     <div>
                         <h2 className='f-h2-400 pb-5 weekly-goal-rings-header'>My Weekly Goals</h2>
                         <div className='flex flex-wrap justify-around '>
@@ -129,7 +135,7 @@ const WorkoutTracker = () => {
                         ></ProgressRing>
                         </div>                        
                     </div>
-                )}
+                {/* )} */}
 
                 </div>
 
