@@ -45,6 +45,7 @@ const WorkoutTracker = () => {
 
                 if (workoutsResponse.ok) {
                     workoutdispatch({ type: 'SET_WORKOUTS', payload: workoutsJson });
+                    console.log(workoutsJson)
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);

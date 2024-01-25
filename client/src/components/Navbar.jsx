@@ -2,7 +2,8 @@ import '../styles/navbar.css'
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom'
 import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
+// import { useAuthContext } from "../hooks/useAuthContext";
+import { useUserContext } from '../hooks/useUserContext';
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,7 +14,8 @@ function Navbar(){
 
 
     const{ logout } = useLogout()
-    const{ user } = useAuthContext()
+    // const{ user } = useAuthContext()
+    const{ user } = useUserContext()
 
     const handleClick = () => {
         logout()
@@ -114,12 +116,13 @@ function Navbar(){
                                     {user && (                                    
                                         <div className="px-4 py-3" role="none">
                                             <p className="text-sm text-gray-900" role="none">
-                                            John Doe
+                                            {/* {user[0].firstname && user[0].lastname ? `${user[0].firstname} ${user[0].lastname}`: user[0].firstname|| user[0].lastname || 'User'} */}
+                                            {'Welcome back!'}
                                             </p>
 
                                                 
                                             <p className="text-sm font-medium text-gray-900 truncate" role="none">
-                                            {user.email}
+                                            {user[0].email}
                                             </p>
 
 
