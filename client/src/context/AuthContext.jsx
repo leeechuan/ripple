@@ -6,7 +6,11 @@ export const AuthContext = createContext()
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const authReducer = (state, action) => {
-    switch (action.type) {
+    switch (action.type) {        
+        // case 'GET_USER':
+        //     return {
+        //         user: action.payload
+        //     }
         case 'LOGIN' :
             return { user: action.payload }
         case 'LOGOUT' :

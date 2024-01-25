@@ -15,7 +15,6 @@ import Navbar from '../components/Navbar'
 
 const UserDetail = () => {
     
-
     const { dispatch } = useUserContext();
     const { user } = useAuthContext();
 
@@ -25,6 +24,7 @@ const UserDetail = () => {
 
     useEffect(() => {
     const fetchUser = async () => {
+        console.log("render")
         try {
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
             headers: {
@@ -109,8 +109,6 @@ const UserDetail = () => {
             handleSubmit(name, email)
             setIsEditMode(false);
         };
-
-
 
     return (
 
