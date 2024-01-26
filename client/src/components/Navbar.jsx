@@ -107,7 +107,7 @@ function Navbar(){
                         <div>
                         <button onClick={toggleProfileDropdownVisibility} type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300">
                             <span className="sr-only">Open user menu</span>
-                            <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo"></img>
+                            <img className="w-8 h-8 rounded-full" src="https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png" alt="user photo"></img>
                         </button>
                         </div>
                         {!isProfileDropdownVisible ? (
