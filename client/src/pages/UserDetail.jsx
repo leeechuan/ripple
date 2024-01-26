@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import '../styles/userdetail.css'
 import { DatePicker } from 'rsuite';
 import 'rsuite/DatePicker/styles/index.css';
+import ReactLoading from 'react-loading'
 
 
 
@@ -18,6 +19,7 @@ const UserDetail = () => {
 
     const { user } = useAuthContext();
     const { dispatch: userDispatch } = useUserContext();
+    const { isLoading, setIsLoading } = useState(true)
 
         // Set actual states
   
@@ -115,6 +117,8 @@ const UserDetail = () => {
               duration: json[0]?.goals?.duration || 0
             })
 
+            setIsLoading(false)
+
 
           } else {
             console.error('Error fetching user:', response.statusText);
@@ -152,6 +156,7 @@ const UserDetail = () => {
         homenumber: thomenumber,
         goals: tgoals
        };
+       console.log(userDetail, "---check this")
       try {
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/`, {
           method: 'PATCH',
@@ -225,11 +230,10 @@ const UserDetail = () => {
       setMobileNumber(tmobilenumber)
       setHomeNumber(thomenumber)
       setGoals({
-        calories: goals?.calories || 0,
-        distance: goals?.distance || 0,
-        duration: goals?.duration || 0
+        calories: tgoals?.calories || 0,
+        distance: tgoals?.distance || 0,
+        duration: tgoals?.duration || 0
       })
-
 
 
 
@@ -247,6 +251,9 @@ const UserDetail = () => {
 
                 <div className="home">
                 <Navbar></Navbar>
+                {! isLoading ?
+                <div>
+
                 <div className='userdetail-page'>
                     <div className="min-h-screen bg-gray-100">
                         <div className="max-w-3xl mx-auto mt-8 p-8 bg-white shadow-md rounded-md">
@@ -354,7 +361,7 @@ const UserDetail = () => {
                                         <input
                                             type="text"
                                             value={tgoals.calories}
-                                            onChange={(e) => settGoals({...goals, calories: e.target.value})}
+                                            onChange={(e) => settGoals({...tgoals, calories: e.target.value})}
                                             className="input-container"
                                         />
                                     </div>
@@ -363,7 +370,7 @@ const UserDetail = () => {
                                         <input
                                             type="text"
                                             value={tgoals.distance}
-                                            onChange={(e) => settGoals({...goals, distance: e.target.value})}
+                                            onChange={(e) => settGoals({...tgoals, distance: e.target.value})}
                                             className="input-container"
                                         />
                                     </div>
@@ -372,7 +379,7 @@ const UserDetail = () => {
                                         <input
                                             type="text"
                                             value={tgoals.duration}
-                                            onChange={(e) => settGoals({...goals, duration: e.target.value})}
+                                            onChange={(e) => settGoals({...tgoals, duration: e.target.value})}
                                             className="input-container"
                                         />
                                     </div>
@@ -402,7 +409,6 @@ const UserDetail = () => {
                                 <div className="userdetail-form non-editable">
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setFirstName(e.target.value)}
                                         value={firstname}>
                                         First Name
                                         </label>
@@ -410,7 +416,6 @@ const UserDetail = () => {
                                     </div>                          
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setLastName(e.target.value)}
                                         value={lastname}>
                                         Last Name
                                         </label>
@@ -418,7 +423,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setGender(e.target.value)}
                                         value={gender}>
                                         Gender
                                         </label>
@@ -426,7 +430,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setEmail(e.target.value)}
                                         value={email}>
                                         Email
                                         </label>
@@ -434,7 +437,6 @@ const UserDetail = () => {
                                     </div>                              
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setDateOfBirth(e.target.value)}
                                         value={dateofbirth}>
                                         Date Of Birth
                                         </label>
@@ -442,7 +444,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setNationality(e.target.value)}
                                         value={nationality}>
                                         Nationality
                                         </label>
@@ -450,7 +451,6 @@ const UserDetail = () => {
                                     </div>                          
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setEmergencyContactName(e.target.value)}
                                         value={emergencycontactname}>
                                         Emergency Contact Name
                                         </label>
@@ -458,7 +458,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setEmergencyContactNumber(e.target.value)}
                                         value={emergencycontactnumber}>
                                         Emergency Contact Number
                                         </label>
@@ -466,7 +465,6 @@ const UserDetail = () => {
                                     </div>                       
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setMobileNumber(e.target.value)}
                                         value={mobilenumber}>
                                         Mobile Number
                                         </label>
@@ -474,7 +472,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setHomeNumber(e.target.value)}
                                         value={homenumber}>
                                         Home Number
                                         </label>
@@ -482,7 +479,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setGoals({...goals, calories: e.target.value})}
                                         value={goals.calories}>
                                         Calories
                                         </label>
@@ -490,7 +486,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setGoals({...goals, distance: e.target.value})}
                                         value={goals.distance}>
                                         Distance
                                         </label>
@@ -498,7 +493,6 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
-                                        onChange={(e) => setGoals({...goals, duration: e.target.value})}
                                         value={goals.duration}>
                                         Duration
                                         </label>
@@ -520,6 +514,15 @@ const UserDetail = () => {
                         {error && <div className="error">{error}</div>}
                     </div>
                 </div>
+                </div>: 
+                
+                <div className=''>
+                <ReactLoading
+                type= "cylon"
+                color= "#892929"
+                ></ReactLoading>    
+                
+                </div>}
             </div>
         );
         };
