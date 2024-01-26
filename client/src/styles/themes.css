@@ -332,6 +332,19 @@ h6{
   font-weight: 500;
 }
 
+.layout-v1 .label-container {
+  display: block;
+  color: var(--text-600);
+  font-weight: 400;
+  font-size: 14px;
+  padding-bottom: 8px;
+}
 
-
+.layout-v1 .input-container {
+  color: var(--text-800);
+  border-width: 1px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: 100%
+}
 

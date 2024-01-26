@@ -1,0 +1,35 @@
+.userdetail-form{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  column-gap: 30px;
+  row-gap: 10px;
+}
+
+.userdetail-form div{
+  width: 45%
+}
+
+.userdetail-form.non-editable div{
+  height: 50px;
+  margin-bottom: 20px
+}
+
+@media (max-width: 768px){
+  .userdetail-form div{
+    width: 100%
+  }
+}
+
+.label-container{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.input-container{
+  font-family: 'Quicksand', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+}
