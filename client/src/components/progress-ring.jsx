@@ -26,7 +26,7 @@ function ProgressRing(props){
         cy="50"
         r="40"
         fill="transparent"
-        strokeDashoffset={"calc((400 - (400 * 62 / 100 *" + props.percentage + ")/100))"}
+        strokeDashoffset={`calc((400 - (400 * 62 / 100 * ${Math.min(props.percentage, 100)} / 100))`}
         ></circle>
         
         {/* <!-- Center text --> */}

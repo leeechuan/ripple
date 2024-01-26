@@ -5,10 +5,16 @@ import { useAuthContext } from '../hooks/useAuthContext'
 // import WorkoutForm from '../components/workoutform'
 import Navbar from '../components/Navbar'
 import '../styles/userdetail.css'
+import { DatePicker } from 'rsuite';
+import 'rsuite/DatePicker/styles/index.css';
+
+
 
 
 
 const UserDetail = () => {
+
+
 
     const { user } = useAuthContext();
     const { dispatch: userDispatch } = useUserContext();
@@ -79,6 +85,7 @@ const UserDetail = () => {
             setLastName(json[0].lastname)
             setGender(json[0].gender)
             setEmail(json[0].email)
+            const[day, month, year] = json[0].dateofbirth.split('/').map(Number)
             setDateOfBirth(json[0].dateofbirth)
             setNationality(json[0].nationality)
             setEmergencyContactName(json[0].emergencycontactname)
@@ -95,7 +102,8 @@ const UserDetail = () => {
             settLastName(json[0].lastname)
             settGender(json[0].gender)
             settEmail(json[0].email)
-            settDateOfBirth(json[0].dateofbirth)
+            
+            settDateOfBirth(new Date(year, month-1, day))
             settNationality(json[0].nationality)
             settEmergencyContactName(json[0].emergencycontactname)
             settEmergencyContactNumber(json[0].emergencycontactnumber)
@@ -132,7 +140,11 @@ const UserDetail = () => {
         lastname: tlastname,
         gender: tgender,
         email: temail,
-        dateofbirth: tdateofbirth,
+        dateofbirth: tdateofbirth.toLocaleDateString('en-GB', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }),
         nationality: tnationality,
         emergencycontactname: temergencycontactname,
         emergencycontactnumber: temergencycontactnumber,
@@ -175,7 +187,8 @@ const UserDetail = () => {
       settLastName(lastname)
       settGender(gender)
       settEmail(email)
-      settDateOfBirth(dateofbirth)
+      const[day, month, year] = dateofbirth.split('/').map(Number)
+      settDateOfBirth(new Date(year, month-1, day))
       settNationality(nationality)
       settEmergencyContactName(emergencycontactname)
       settEmergencyContactNumber(emergencycontactnumber)
@@ -201,7 +214,11 @@ const UserDetail = () => {
       setLastName(tlastname)
       setGender(tgender)
       setEmail(temail)
-      setDateOfBirth(tdateofbirth)
+      setDateOfBirth(tdateofbirth.toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      }))
       setNationality(tnationality)
       setEmergencyContactName(temergencycontactname)
       setEmergencyContactNumber(temergencycontactnumber)
@@ -257,12 +274,15 @@ const UserDetail = () => {
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container">Gender</label>
-                                        <input
-                                            type="text"
-                                            value={tgender}
-                                            onChange={(e) => settGender(e.target.value)}
-                                            className="input-container"
-                                        />
+                                        <select id="gender" 
+                                        value={tgender}
+                                        onChange={(e) => settGender(e.target.value)}
+                                        className="input-container cursor-pointer">
+                                            <option selected>Choose a gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Others">Others</option>
+                                        </select>
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container">Email</label>
@@ -273,15 +293,17 @@ const UserDetail = () => {
                                             className="input-container"
                                         />
                                     </div>
-                                    <div className="mb-4">
+                                    <div className="mb-4 dob-datepicker">
                                         <label className="label-container">Date Of Birth</label>
-                                        <input
-                                            type="text"
+                                        <DatePicker
                                             value={tdateofbirth}
-                                            onChange={(e) => settDateOfBirth(e.target.value)}
-                                            className="input-container"
+                                            hideHours={true}
+                                            hideMinutes={true}
+                                            hideSeconds={true}
+                                            onChange={(value) => settDateOfBirth(value)}
                                         />
                                     </div>
+                                    
                                     <div className="mb-4">
                                         <label className="label-container">Nationality</label>
                                         <input
