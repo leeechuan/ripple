@@ -9,6 +9,7 @@ import "../styles/workouttracker.css"
 import ProgressRing from '../components/progress-ring'
 import WorkoutDetailTable from '../components/workoutdetailtable'
 // import { json } from 'react-router-dom'
+import ReactLoading from 'react-loading'
 
 
 
@@ -61,9 +62,9 @@ const WorkoutTracker = () => {
         }
     }, [userdispatch, workoutdispatch, user, isLoading, userdetail]);
 
-    useEffect(() =>{
-        console.log(userdetail, "--userdetail after dispatch")
-    },[userdetail])
+    // useEffect(() =>{
+    //     console.log(userdetail, "--userdetail after dispatch")
+    // },[userdetail])
 
 
 
@@ -111,6 +112,7 @@ const WorkoutTracker = () => {
     return (
         <div className="home">
             <Navbar></Navbar>
+            {!isLoading ?
             <div className='workout-page'>
                 <div className='weekly-goal-rings'>
 
@@ -165,7 +167,17 @@ const WorkoutTracker = () => {
                 </div> */}
 
 
+            </div> :
+            
+            <div className=''>
+            <ReactLoading
+            type= "cylon"
+            color= "#892929"
+            ></ReactLoading>    
+            
             </div>
+            
+            }
 
         </div>
     )
