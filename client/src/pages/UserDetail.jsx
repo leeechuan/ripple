@@ -4,12 +4,7 @@ import { useUserContext } from '../hooks/useUserContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 // import WorkoutForm from '../components/workoutform'
 import Navbar from '../components/Navbar'
-
-
-// import "../styles/workouttracker.css"
-
-// import ProgressRing from '../components/progress-ring'
-// import WorkoutDetailTable from '../components/workoutdetailtable'
+import '../styles/userdetail.css'
 
 
 
@@ -17,22 +12,49 @@ const UserDetail = () => {
 
     const { user } = useAuthContext();
     const { dispatch: userDispatch } = useUserContext();
+
+        // Set actual states
   
-    const [firstname, setFirstName] = useState(user ? user.firstname : '');
-    const [lastname, setLastName] = useState(user ? user.lastname : '');
-    const [gender, setGender] = useState(user ? user.gender : '');
-    const [email, setEmail] = useState(user ? user.email : '');
-    const [dateofbirth, setDateOfBirth] = useState(user ? user.dateofbirth : '');
-    const [nationality, setNationality] = useState(user ? user.nationality : '');
-    const [emergencycontactname, setEmergencyContactName] = useState(user ? user.emergencycontactname : '');
-    const [emergencycontactnumber, setEmergencyContactNumber] = useState(user ? user.emergencycontactnumber : '');
-    const [mobilenumber, setMobileNumber] = useState(user ? user.mobilenumber : '');
-    const [homenumber, setHomeNumber] = useState(user ? user.homenumber : '');
-    const [goals, setGoals] = useState({
-      calories: user && user.goals ? user.goals.calories : 0, 
-      distance: user && user.goals ? user.goals.distance : 0,
-      duration: user && user.goals ? user.goals.duration : 0
-    });
+        const [firstname, setFirstName] = useState(user ? user.firstname : '');
+        const [lastname, setLastName] = useState(user ? user.lastname : '');
+        const [gender, setGender] = useState(user ? user.gender : '');
+        const [email, setEmail] = useState(user ? user.email : '');
+        const [dateofbirth, setDateOfBirth] = useState(user ? user.dateofbirth : '');
+        const [nationality, setNationality] = useState(user ? user.nationality : '');
+        const [emergencycontactname, setEmergencyContactName] = useState(user ? user.emergencycontactname : '');
+        const [emergencycontactnumber, setEmergencyContactNumber] = useState(user ? user.emergencycontactnumber : '');
+        const [mobilenumber, setMobileNumber] = useState(user ? user.mobilenumber : '');
+        const [homenumber, setHomeNumber] = useState(user ? user.homenumber : '');
+        const [goals, setGoals] = useState({
+        calories: user && user.goals ? user.goals.calories : 0, 
+        distance: user && user.goals ? user.goals.distance : 0,
+        duration: user && user.goals ? user.goals.duration : 0
+        });
+
+        // Set temporary states
+
+        const [tfirstname, settFirstName] = useState(user ? user.firstname : '');
+        const [tlastname, settLastName] = useState(user ? user.lastname : '');
+        const [tgender, settGender] = useState(user ? user.gender : '');
+        const [temail, settEmail] = useState(user ? user.email : '');
+        const [tdateofbirth, settDateOfBirth] = useState(user ? user.dateofbirth : '');
+        const [tnationality, settNationality] = useState(user ? user.nationality : '');
+        const [temergencycontactname, settEmergencyContactName] = useState(user ? user.emergencycontactname : '');
+        const [temergencycontactnumber, settEmergencyContactNumber] = useState(user ? user.emergencycontactnumber : '');
+        const [tmobilenumber, settMobileNumber] = useState(user ? user.mobilenumber : '');
+        const [thomenumber, settHomeNumber] = useState(user ? user.homenumber : '');
+        const [tgoals, settGoals] = useState({
+          calories: user && user.goals ? user.goals.calories : 0, 
+          distance: user && user.goals ? user.goals.distance : 0,
+          duration: user && user.goals ? user.goals.duration : 0
+        });
+    
+
+
+
+
+
+
     const [error, setError] = useState(null);
     // eslint-disable-next-line no-unused-vars
     const [emptyFields, setEmptyFields] = useState([]);
@@ -69,6 +91,22 @@ const UserDetail = () => {
               duration: json[0]?.goals?.duration || 0
             })
 
+            settFirstName(json[0].firstname)
+            settLastName(json[0].lastname)
+            settGender(json[0].gender)
+            settEmail(json[0].email)
+            settDateOfBirth(json[0].dateofbirth)
+            settNationality(json[0].nationality)
+            settEmergencyContactName(json[0].emergencycontactname)
+            settEmergencyContactNumber(json[0].emergencycontactnumber)
+            settMobileNumber(json[0].mobilenumber)
+            settHomeNumber(json[0].homenumber)
+            settGoals({
+              calories: json[0]?.goals?.calories || 0,
+              distance: json[0]?.goals?.distance || 0,
+              duration: json[0]?.goals?.duration || 0
+            })
+
 
           } else {
             console.error('Error fetching user:', response.statusText);
@@ -90,19 +128,18 @@ const UserDetail = () => {
       }
   
       const userDetail = { 
-        firstname,
-        lastname,
-        gender,
-        email,
-        dateofbirth,
-        nationality,
-        emergencycontactname,
-        emergencycontactnumber,
-        mobilenumber,
-        homenumber,
-        goals
+        firstname: tfirstname,
+        lastname: tlastname,
+        gender: tgender,
+        email: temail,
+        dateofbirth: tdateofbirth,
+        nationality: tnationality,
+        emergencycontactname: temergencycontactname,
+        emergencycontactnumber: temergencycontactnumber,
+        mobilenumber: tmobilenumber,
+        homenumber: thomenumber,
+        goals: tgoals
        };
-  
       try {
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/`, {
           method: 'PATCH',
@@ -114,6 +151,7 @@ const UserDetail = () => {
         });
   
         const json = await response.json();
+
   
         if (!response.ok) {
           setError(json.error);
@@ -131,12 +169,61 @@ const UserDetail = () => {
   
     const handleEditToggle = () => {
       setIsEditMode(!isEditMode);
+      
+      //Reset temp states
+      settFirstName(firstname)
+      settLastName(lastname)
+      settGender(gender)
+      settEmail(email)
+      settDateOfBirth(dateofbirth)
+      settNationality(nationality)
+      settEmergencyContactName(emergencycontactname)
+      settEmergencyContactNumber(emergencycontactnumber)
+      settMobileNumber(mobilenumber)
+      settHomeNumber(homenumber)
+      settGoals({
+        calories: goals?.calories || 0,
+        distance: goals?.distance || 0,
+        duration: goals?.duration || 0
+      })
+
+
+
     };
   
     const handleSave = () => {
       handleSubmit();
+      
+
+
+      //Save over from temp to actual state
+      setFirstName(tfirstname)
+      setLastName(tlastname)
+      setGender(tgender)
+      setEmail(temail)
+      setDateOfBirth(tdateofbirth)
+      setNationality(tnationality)
+      setEmergencyContactName(temergencycontactname)
+      setEmergencyContactNumber(temergencycontactnumber)
+      setMobileNumber(tmobilenumber)
+      setHomeNumber(thomenumber)
+      setGoals({
+        calories: goals?.calories || 0,
+        distance: goals?.distance || 0,
+        duration: goals?.duration || 0
+      })
+
+
+
+
+
       setIsEditMode(false);
     };
+
+
+
+
+
 
     
     return (
@@ -149,251 +236,263 @@ const UserDetail = () => {
                             <h1 className="text-2xl font-semibold mb-4">User Details</h1>
                             {isEditMode ? (
                                 <div>
+                                <div className="userdetail-form">
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">First Name</label>
+                                        <label className="label-container">First Name</label>
                                         <input
                                             type="text"
-                                            value={firstname}
-                                            onChange={(e) => setFirstName(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tfirstname}
+                                            onChange={(e) => settFirstName(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Last Name</label>
+                                        <label className="label-container">Last Name</label>
                                         <input
                                             type="text"
-                                            value={lastname}
-                                            onChange={(e) => setLastName(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tlastname}
+                                            onChange={(e) => settLastName(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Gender</label>
+                                        <label className="label-container">Gender</label>
                                         <input
                                             type="text"
-                                            value={gender}
-                                            onChange={(e) => setGender(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tgender}
+                                            onChange={(e) => settGender(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Email</label>
+                                        <label className="label-container">Email</label>
                                         <input
                                             type="text"
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={temail}
+                                            onChange={(e) => settEmail(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Date Of Birth</label>
+                                        <label className="label-container">Date Of Birth</label>
                                         <input
                                             type="text"
-                                            value={dateofbirth}
-                                            onChange={(e) => setDateOfBirth(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tdateofbirth}
+                                            onChange={(e) => settDateOfBirth(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Nationality</label>
+                                        <label className="label-container">Nationality</label>
                                         <input
                                             type="text"
-                                            value={nationality}
-                                            onChange={(e) => setNationality(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tnationality}
+                                            onChange={(e) => settNationality(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Emergency Contact Name</label>
+                                        <label className="label-container">Emergency Contact Name</label>
                                         <input
                                             type="text"
-                                            value={emergencycontactname}
-                                            onChange={(e) => setEmergencyContactName(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={temergencycontactname}
+                                            onChange={(e) => settEmergencyContactName(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Emergency Contact Number</label>
+                                        <label className="label-container">Emergency Contact Number</label>
                                         <input
                                             type="text"
-                                            value={emergencycontactnumber}
-                                            onChange={(e) => setEmergencyContactNumber(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={temergencycontactnumber}
+                                            onChange={(e) => settEmergencyContactNumber(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Mobile Number</label>
+                                        <label className="label-container">Mobile Number</label>
                                         <input
                                             type="text"
-                                            value={mobilenumber}
-                                            onChange={(e) => setMobileNumber(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tmobilenumber}
+                                            onChange={(e) => settMobileNumber(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Home Number</label>
+                                        <label className="label-container">Home Number</label>
                                         <input
                                             type="text"
-                                            value={homenumber}
-                                            onChange={(e) => setHomeNumber(e.target.value)}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={thomenumber}
+                                            onChange={(e) => settHomeNumber(e.target.value)}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Calories</label>
+                                        <label className="label-container">Calories</label>
                                         <input
                                             type="text"
-                                            value={goals.calories}
-                                            onChange={(e) => setGoals({...goals, calories: e.target.value})}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tgoals.calories}
+                                            onChange={(e) => settGoals({...goals, calories: e.target.value})}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Distance</label>
+                                        <label className="label-container">Distance</label>
                                         <input
                                             type="text"
-                                            value={goals.distance}
-                                            onChange={(e) => setGoals({...goals, distance: e.target.value})}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tgoals.distance}
+                                            onChange={(e) => settGoals({...goals, distance: e.target.value})}
+                                            className="input-container"
                                         />
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600">Duration</label>
+                                        <label className="label-container">Duration</label>
                                         <input
                                             type="text"
-                                            value={goals.duration}
-                                            onChange={(e) => setGoals({...goals, duration: e.target.value})}
-                                            className="text-md text-gray-800 border rounded-md p-2 w-full"
+                                            value={tgoals.duration}
+                                            onChange={(e) => settGoals({...goals, duration: e.target.value})}
+                                            className="input-container"
                                         />
                                     </div>
+
+                                </div>
+
+                                <div className='pt-5'>
                                     <button
                                         onClick={handleSave}
-                                        className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2"
+                                        className="btn-primary text-default py-2 px-4 rounded-md mr-2"
                                     >
                                         Save
                                     </button>
                                     <button
                                         onClick={handleEditToggle}
-                                        className="bg-gray-500 text-white py-2 px-4 rounded-md"
+                                        className="bg-gray-500 text-default py-2 px-4 rounded-md"
                                     >
                                         Cancel
-                                    </button>
+                                    </button>                                    
                                 </div>
+
+                                </div>                     
                             ) : (
 
                               // Not editable section
-                                <div>
+                              <div>
+                                <div className="userdetail-form non-editable">
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setFirstName(e.target.value)}
                                         value={firstname}>
                                         First Name
                                         </label>
-                                        <p className="text-md text-gray-800">{firstname}</p>
+                                        <p className="text-md text-gray-800 font-bold">{firstname}</p>
                                     </div>                          
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setLastName(e.target.value)}
                                         value={lastname}>
                                         Last Name
                                         </label>
-                                        <p className="text-md text-gray-800">{lastname}</p>
+                                        <p className="text-md text-gray-800 font-bold">{lastname}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setGender(e.target.value)}
                                         value={gender}>
                                         Gender
                                         </label>
-                                        <p className="text-md text-gray-800">{gender}</p>
+                                        <p className="text-md text-gray-800 font-bold">{gender}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setEmail(e.target.value)}
                                         value={email}>
                                         Email
                                         </label>
-                                        <p className="text-md text-gray-800">{email}</p>
+                                        <p className="text-md text-gray-800 font-bold">{email}</p>
                                     </div>                              
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setDateOfBirth(e.target.value)}
                                         value={dateofbirth}>
                                         Date Of Birth
                                         </label>
-                                        <p className="text-md text-gray-800">{dateofbirth}</p>
+                                        <p className="text-md text-gray-800 font-bold">{dateofbirth}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setNationality(e.target.value)}
                                         value={nationality}>
                                         Nationality
                                         </label>
-                                        <p className="text-md text-gray-800">{nationality}</p>
+                                        <p className="text-md text-gray-800 font-bold">{nationality}</p>
                                     </div>                          
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setEmergencyContactName(e.target.value)}
                                         value={emergencycontactname}>
                                         Emergency Contact Name
                                         </label>
-                                        <p className="text-md text-gray-800">{emergencycontactname}</p>
+                                        <p className="text-md text-gray-800 font-bold">{emergencycontactname}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setEmergencyContactNumber(e.target.value)}
                                         value={emergencycontactnumber}>
                                         Emergency Contact Number
                                         </label>
-                                        <p className="text-md text-gray-800">{emergencycontactnumber}</p>
+                                        <p className="text-md text-gray-800 font-bold">{emergencycontactnumber}</p>
                                     </div>                       
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setMobileNumber(e.target.value)}
                                         value={mobilenumber}>
                                         Mobile Number
                                         </label>
-                                        <p className="text-md text-gray-800">{mobilenumber}</p>
+                                        <p className="text-md text-gray-800 font-bold">{mobilenumber}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setHomeNumber(e.target.value)}
                                         value={homenumber}>
                                         Home Number
                                         </label>
-                                        <p className="text-md text-gray-800">{homenumber}</p>
+                                        <p className="text-md text-gray-800 font-bold">{homenumber}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setGoals({...goals, calories: e.target.value})}
                                         value={goals.calories}>
                                         Calories
                                         </label>
-                                        <p className="text-md text-gray-800">{goals.calories}</p>
+                                        <p className="text-md text-gray-800 font-bold">{goals.calories}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setGoals({...goals, distance: e.target.value})}
                                         value={goals.distance}>
                                         Distance
                                         </label>
-                                        <p className="text-md text-gray-800">{goals.distance}</p>
+                                        <p className="text-md text-gray-800 font-bold">{goals.distance}</p>
                                     </div>
                                     <div className="mb-4">
-                                        <label className="block text-sm font-medium text-gray-600"
+                                        <label className="label-container"
                                         onChange={(e) => setGoals({...goals, duration: e.target.value})}
                                         value={goals.duration}>
                                         Duration
                                         </label>
-                                        <p className="text-md text-gray-800">{goals.duration}</p>
+                                        <p className="text-md text-gray-800 font-bold">{goals.duration}</p>
                                     </div>
+
+                                </div>
+                                <div className='pt-5'>
                                     <button
                                         onClick={handleEditToggle}
-                                        className="bg-blue-500 text-white py-2 px-4 rounded-md"
-                                    >
+                                        className="btn-primary text-default py-2 px-4 rounded-md">
                                         Edit
-                                    </button>
+                                    </button>   
                                 </div>
+                             
+                            </div>
                             )}
                         </div>
                         {error && <div className="error">{error}</div>}
