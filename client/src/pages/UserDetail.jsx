@@ -19,7 +19,7 @@ const UserDetail = () => {
 
     const { user } = useAuthContext();
     const { dispatch: userDispatch } = useUserContext();
-    const { isLoading, setIsLoading } = useState(true)
+    const [ isLoading, setIsLoading ] = useState(true)
 
         // Set actual states
   
