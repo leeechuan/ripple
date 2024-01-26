@@ -6,9 +6,41 @@
   row-gap: 10px;
 }
 
-.userdetail-form div{
+.userdetail-form div:not(.dob-datepicker div){
   width: 45%
 }
+
+.rs-picker{
+  width: 100%;
+  color: var(--text-800);
+  border: 1px solid #6b7280;
+  /* border-width: 1px; */
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: 100%;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.rs-picker .rs-input-group{
+  border: none
+}
+
+.rs-input-group.rs-input-group-inside .rs-input{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/* .rs-picker.rs-picker-date.rs-picker-default.rs-picker-toggle-wrapper.rs-picker-cleanable .rs-input-group.rs-input-group-inside:focus{
+  border: 1px solid red !important
+} */
+
+.rs-input-group:not(.rs-input-group-disabled) :hover, .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus, .rs-input-group:focus-within,
+.dob-datepicker .rs-input-group:not(.rs-input-group-disabled).rs-input-group-focus, .rs-input-group:focus-within {
+  border: 0px solid;
+  outline: unset 
+}
+
 
 .userdetail-form.non-editable div{
   height: 50px;
@@ -16,7 +48,7 @@
 }
 
 @media (max-width: 768px){
-  .userdetail-form div{
+  .userdetail-form div:not(.dob-datepicker div){
     width: 100%
   }
 }
