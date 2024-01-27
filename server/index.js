@@ -5,6 +5,7 @@ require('dotenv').config()
 const workoutRoutes = require('./routes/workouts.js')
 const userRoutes = require('./routes/users.js')
 const userdetailRoutes = require('./routes/userdetail.js')
+const archiveRoutes = require('./routes/archive.js')
 
 
 // Express app
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
 app.use('/api/workouts', workoutRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/users', userdetailRoutes)
+app.use('/api/archive', archiveRoutes)
 
 
 // // Connect to DB
