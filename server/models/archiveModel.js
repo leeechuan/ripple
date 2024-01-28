@@ -6,7 +6,7 @@ const archiveSchema = new Schema({
     user_id: {
         type: String,
         required: true,
-        unique: true,
+        unique: false,
     },
     totalCalories: {
         type: Number,
