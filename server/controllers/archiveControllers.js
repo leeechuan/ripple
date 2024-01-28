@@ -20,13 +20,20 @@ const archiveData = async () => {
         endOfWeek.setDate(today.getDate() + (7 - today.getDay()));
         endOfWeek.setHours(23, 59, 59, 999);
 
+        console.log(startOfWeek, "---------", endOfWeek)
+        console.log(startOfDay(startOfWeek), "xxxxxxxxxx", endOfDay(endOfWeek))
+        console.log(typeof(startOfWeek))
+        console.log(typeof(startOfDay(startOfWeek)))
+
         // Find workouts that are not in the current week
         const workoutsToArchive = await Workout.find({
             createdAt: {
-                $lt: startOfDay(startOfWeek),
-                $gte: endOfDay(endOfWeek),
+                $lte: startOfWeek,
+                // $lte: endOfWeek,
             },
         });
+
+        console.log(workoutsToArchive)
 
         // Archive the workouts
         await Promise.all(workoutsToArchive.map(async (workout) => {
@@ -49,7 +56,8 @@ const archiveData = async () => {
             );
 
             // Remove the workout from the main table
-            await workout.remove();
+            // await workout.remove();
+            await Workout.findOneAndDelete(workout._id);
         }));
 
         console.log('Archiving process completed successfully');
@@ -59,6 +67,10 @@ const archiveData = async () => {
     }
 };
 
+
+
+
+
 // Function to get the week number from a date
 Date.prototype.getWeek = function () {
     const firstDayOfYear = new Date(this.getFullYear(), 0, 1);
@@ -66,7 +78,10 @@ Date.prototype.getWeek = function () {
     return Math.ceil((days + firstDayOfYear.getDay() + 1) / 7);
 };
 
-// Function to start the archiving process manually
+
+
+
+// Start the archiving process manually
 const startManualArchiving = async (req, res) => {
     try {
         await archiveData();
@@ -76,6 +91,9 @@ const startManualArchiving = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+
+
 
 
 // GET archived data for a specific user and week
@@ -99,18 +117,6 @@ const getArchivedData = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
-
-
-// // GET archived data for a specific user and week
-// const getArchivedData = async (user_id, week) => {
-//     try {
-//         const archivedData = await Archive.findOne({ user_id, week });
-//         return archivedData;
-//     } catch (error) {
-//         console.error('Error retrieving archived data:', error);
-//         throw error; // Handle the error appropriately in your application
-//     }
-// };
 
 
 module.exports = {
