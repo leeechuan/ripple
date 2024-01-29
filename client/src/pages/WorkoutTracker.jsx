@@ -35,7 +35,7 @@ const WorkoutTracker = () => {
                         headers: {
                             'Authorization': `Bearer ${user.token}`
                         }
-                    })
+                    }),
                 ]);
 
                 const userJson = await userResponse.json();
@@ -43,12 +43,10 @@ const WorkoutTracker = () => {
 
                 if (userResponse.ok) {
                     userdispatch({ type: 'GET_USER', payload: userJson });
-                    console.log(userJson,"--userjson")
                 }
 
                 if (workoutsResponse.ok) {
                     workoutdispatch({ type: 'SET_WORKOUTS', payload: workoutsJson });
-                    console.log(workoutsJson)
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -61,12 +59,6 @@ const WorkoutTracker = () => {
             fetchData();
         }
     }, [userdispatch, workoutdispatch, user, isLoading, userdetail]);
-
-    // useEffect(() =>{
-    //     console.log(userdetail, "--userdetail after dispatch")
-    // },[userdetail])
-
-
 
     // Function to calculate totals
 

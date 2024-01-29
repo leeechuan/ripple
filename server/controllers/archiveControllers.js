@@ -1,3 +1,6 @@
+// NOTE: Not the ideal method of archiving Data as you would probably want an async timer function. But for the small scope of this project
+// I have intentionally opted to use manual archive whenever the user visits the archive page
+
 const Workout = require('../models/workoutModel')
 const Archive = require('../models/archiveModel')
 const mongoose = require ('mongoose')
@@ -20,11 +23,6 @@ const archiveData = async () => {
         endOfWeek.setDate(today.getDate() + (7 - today.getDay()));
         endOfWeek.setHours(23, 59, 59, 999);
 
-        console.log(startOfWeek, "---------", endOfWeek)
-        console.log(startOfDay(startOfWeek), "xxxxxxxxxx", endOfDay(endOfWeek))
-        console.log(typeof(startOfWeek))
-        console.log(typeof(startOfDay(startOfWeek)))
-
         // Find workouts that are not in the current week
         const workoutsToArchive = await Workout.find({
             createdAt: {
@@ -33,24 +31,27 @@ const archiveData = async () => {
             },
         });
 
-        console.log(workoutsToArchive)
 
         // Archive the workouts
         await Promise.all(workoutsToArchive.map(async (workout) => {
             const { user_id, calories, distance, duration } = workout;
 
             // Calculate week based on createdAt date
-            const week = workout.createdAt.getWeek();
+            const {week, year} = workout.createdAt.getWeek();
+
 
             // Update totals in the Archive collection
             await Archive.findOneAndUpdate(
-                { user_id, week },
+                { user_id, week, year},
                 {
                     $inc: {
                         totalCalories: calories,
                         totalDistance: distance,
                         totalDuration: duration,
                     },
+                    $set: {
+                        weekEnding: endOfWeek,
+                    }
                 },
                 { upsert: true }
             );
@@ -75,8 +76,15 @@ const archiveData = async () => {
 Date.prototype.getWeek = function () {
     const firstDayOfYear = new Date(this.getFullYear(), 0, 1);
     const days = Math.floor((this - firstDayOfYear) / 86400000);
-    return Math.ceil((days + firstDayOfYear.getDay() + 1) / 7);
+    const week = Math.ceil((days + firstDayOfYear.getDay() + 1) / 7);
+    const year = this.getFullYear()
+
+    return {
+        week,
+        year
+    }
 };
+
 
 
 
@@ -99,13 +107,13 @@ const startManualArchiving = async (req, res) => {
 // GET archived data for a specific user and week
 const getArchivedData = async (req, res) => {
     try {
-        const { user_id, week } = req.query; // Assuming you are passing these as query parameters
+        const user_id = req.user._id
 
-        if (!user_id || !week) {
+        if (!user_id) {
             return res.status(400).json({ error: 'Missing required parameters' });
         }
 
-        const archivedData = await Archive.findOne({ user_id, week });
+        const archivedData = await Archive.find({ user_id });
         
         if (archivedData) {
             res.status(200).json(archivedData);
