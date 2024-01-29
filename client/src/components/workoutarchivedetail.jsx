@@ -1,6 +1,29 @@
 // import { format } from 'date-fns/format'
 
-const WorkoutArchiveDetail = ({ workout }) => {
+const WorkoutArchiveDetail = ({ archive }) => {
+
+    function getWeekEndingDate(weekNumber, year) {
+        // Calculate the date of the first day of the first week in the given year
+        const firstDayOfYear = new Date(year, 0, 1);
+        const daysToFirstWeekStart = 7 - firstDayOfYear.getDay();
+        const firstWeekStartDate = new Date(year, 0, 1 + daysToFirstWeekStart);
+      
+        // Calculate the number of days to add to the first day of the first week
+        // to get to the desired week
+        const daysToAdd = (weekNumber - 1) * 7;
+      
+        // Calculate the week ending date by adding the days to the first day of the week
+        const weekEndingDate = new Date(firstWeekStartDate);
+        weekEndingDate.setDate(firstWeekStartDate.getDate() + daysToAdd);
+      
+        return weekEndingDate;
+      }
+
+      const weekendingDate = getWeekEndingDate(archive.week, archive.year).toLocaleDateString('en-GB', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      })
 
 
     return (
@@ -11,13 +34,16 @@ const WorkoutArchiveDetail = ({ workout }) => {
                 <h4 className="">{format(new Date(workout.createdAt),'EEEE')}</h4>
                 </th> */}
                 <td className="px-6 py-4">
-                {workout.calories}
+                {weekendingDate}
                 </td>
                 <td className="px-6 py-4">
-                {workout.distance}
+                {archive.totalCalories}
                 </td>
                 <td className="px-6 py-4">
-                {workout.duration}
+                {archive.totalDistance}
+                </td>
+                <td className="px-6 py-4">
+                {archive.totalDuration}
                 </td>
             </tr>
 

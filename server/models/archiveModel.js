@@ -22,7 +22,9 @@ const archiveSchema = new Schema({
     },
     week: {
         type: Number,
-        required: true,
+    },
+    year: {
+        type: Number,
     },
 }, { timestamps: true });
 

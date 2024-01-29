@@ -1,7 +1,7 @@
 import WorkoutArchiveDetail from "./workoutarchivedetail"
 
 
-const WorkoutArchiveTable = ({workouts}) => {
+const WorkoutArchiveTable = ({archive}) => {
 
 
     return (
@@ -10,21 +10,28 @@ const WorkoutArchiveTable = ({workouts}) => {
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                     <tr>
                         <th scope="col" className="px-6 py-3">
-                            Calories Burnt
+                            Week Ending In
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Distance
+                            Total Calories Burnt
                         </th>
                         <th scope="col" className="px-6 py-3">
-                            Duration
+                            Total Distance
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Total Duration
                         </th>
 
                     </tr>
                 </thead>
                 <tbody>                    
-                    {workouts && workouts.map((workout) => (
-                        <WorkoutArchiveDetail key={workout._id} workout={workout}/>
+                    {archive && archive.map((archive) => (
+                        <WorkoutArchiveDetail key={archive._id} archive={archive}/>
                     ))}
+                    {/* {Array.isArray(archive) &&
+                    archive.map((archiveItem) => (
+                    <WorkoutArchiveDetail key={archiveItem._id} archive={archiveItem} />
+                    ))} */}
 
                     
                 </tbody>
