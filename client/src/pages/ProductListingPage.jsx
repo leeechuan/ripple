@@ -3,16 +3,50 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import Navbar from '../components/Navbar'
 import "../styles/productlisting.css"
 import ReactLoading from 'react-loading'
+import summerbg from "../assets/summer-bg.jpg"
 
 
 
 const ProductListing = () => {
     
 
-    // const { userdetail, dispatch: userdispatch } = useUserContext();
     const { user } = useAuthContext();
-    // const { workouts, dispatch: workoutdispatch } = useWorkoutsContext();
+    const [products, setProducts] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            try {
+                const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/products`, {
+                  headers: {
+                    'Authorization': `Bearer ${user.token}`
+                  }
+                });
+        
+                if (response.ok) {
+                  const json = await response.json();
+                  setProducts(json)
+                  console.log(json)
+
+                  setIsLoading(false)
+
+
+                } else {
+                  console.error('Error fetching products:', response.statusText);
+                }
+              } catch (error) {
+                console.error('Error fetching products:', error);
+              }
+            };
+
+
+        if (user && isLoading) {
+            fetchData();
+        }
+
+    }, [isLoading, user, setProducts]);
+
 
 
 
@@ -20,16 +54,16 @@ const ProductListing = () => {
     return (
         <div className="home">
             <Navbar></Navbar>
-            {isLoading ?
+            {!isLoading ?
             <div className='plp-page'>
-                <div className='weekly-goal-rings'>
+                <div className=''>
 
-                    <div>
-                        <h2 className='f-h2-400 pb-5 weekly-goal-rings-header'>Summer Sale</h2>
+                    <div className='relative'>
+                        <img className="summer-bg" src={summerbg}></img>
+                        <h2 className='f-h2-400 pb-5 product-hero-title'>Summer Sale</h2>
                         <div className='flex flex-wrap justify-around '>
                         </div>                        
                     </div>
-
 
                 </div>
 
