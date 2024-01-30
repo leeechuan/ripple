@@ -9,6 +9,7 @@ import UserDetail from './pages/UserDetail'
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 import WorkoutArchive from './pages/WorkoutArchive'
+import ProductListing from './pages/ProductListingPage'
 
 
 
@@ -26,6 +27,7 @@ function App() {
             <Route path="/workout" element={user ? <WorkoutTracker /> : <Navigate to="/login"></Navigate>}></Route>
             <Route path="/userdetail" element={user ? <UserDetail /> : <Navigate to="/login"></Navigate>}></Route>
             <Route path="/workoutarchive" element={user ? <WorkoutArchive /> : <Navigate to="/login"></Navigate>}></Route>
+            <Route path="/products" element={user ? <ProductListing /> : <Navigate to="/login"></Navigate>}></Route>
           </Routes>
         </Router>
       </div>
