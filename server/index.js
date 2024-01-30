@@ -6,6 +6,7 @@ const workoutRoutes = require('./routes/workouts.js')
 const userRoutes = require('./routes/users.js')
 const userdetailRoutes = require('./routes/userdetail.js')
 const archiveRoutes = require('./routes/archive.js')
+const productRoutes = require('./routes/products.js')
 
 
 // Express app
@@ -45,7 +46,7 @@ app.use('/api/workouts', workoutRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/users', userdetailRoutes)
 app.use('/api/archive', archiveRoutes)
-
+app.use('/api/products', productRoutes)
 
 // // Connect to DB
 
