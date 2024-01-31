@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar'
 import "../styles/productlisting.css"
 import ReactLoading from 'react-loading'
 import summerbg from "../assets/summer-bg.jpg"
-
+import ProductCard from '../components/productcontentcard'
 
 
 const ProductListing = () => {
@@ -60,13 +60,22 @@ const ProductListing = () => {
 
                     <div className='relative'>
                         <img className="summer-bg" src={summerbg}></img>
-                        <h2 className='f-h2-400 pb-5 product-hero-title'>Summer Sale</h2>
+                        <div className='product-hero-title-container'>
+                          <h1 className='f-h1 pb-5 product-hero-title'>Holiday Sale</h1>
+                          <h6 className='f-h6 pb-5 product-hero-subtitle'>Up to 70% off selected products. Purchase at any club outlets.</h6>                          
+                        </div>
+
                         <div className='flex flex-wrap justify-around '>
+
+
                         </div>                        
                     </div>
 
                 </div>
-
+                  
+                  {products && products.map((product) => (
+                        <ProductCard key={product._id} product={product}/>
+                  ))}
                 <div className='lg:flex gap-8'>
 
 
