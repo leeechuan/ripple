@@ -2,11 +2,19 @@ img.summer-bg{
     border-radius: 20px;
     position: relative;
     width: 100vw;
-    height: 40vw;
+    height: 25vw;
     object-fit: cover;
     object-position: 0 15%;
+    opacity: 0.8;
+    filter: grayscale(30%);
 }
 
+@media (max-width: 1024px){
+    img.summer-bg{
+        height: 40vw;
+        object-position: 0 5%;
+    }
+}
 @media (max-width: 768px){
     img.summer-bg{
         height: 80vw;
@@ -14,16 +22,29 @@ img.summer-bg{
     }
 }
 
-.product-hero-title{
+.product-hero-title-container{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
-/* 
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-text-align: center; */
+
+.plp-page .product-hero-title{
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: var(--primary-600);
+    color: transparent;
+    font-size: 80px;
+    line-height: 5rem;
+    font-weight: 600;
+}
+
+.plp-page .product-hero-subtitle{
+    color: var(--text-default);
+    font-weight: 700
+}
+
+.product-img{
+    height: 10vw;
+    width: 10vw;
+}
