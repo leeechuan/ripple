@@ -45,6 +45,12 @@ img.summer-bg{
 }
 
 .product-img{
-    height: 10vw;
-    width: 10vw;
+
+    width: 400px;
+}
+
+@media (max-width: 1024px){
+    .product-img{
+        width: 500px
+    }
 }
