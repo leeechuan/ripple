@@ -49,8 +49,6 @@ const ProductListing = () => {
 
 
 
-
-
     return (
         <div className="home">
             <Navbar></Navbar>
