@@ -72,15 +72,16 @@ const ProductListing = () => {
                     </div>
 
                 </div>
-                  
+                
+                <div className='product-grid grid lg:grid-cols-3 grid-cols-2 '>
+
                   {products && products.map((product) => (
                         <ProductCard key={product._id} product={product}/>
                   ))}
-                <div className='lg:flex gap-8'>
-
-
 
                 </div>
+
+
 
 
             </div> :

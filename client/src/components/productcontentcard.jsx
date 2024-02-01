@@ -5,17 +5,15 @@ function ProductCard({product}){
 
     return (
 
-        <div className={"product-indiv-container px-6 py-8"}>
-            <div className="flex items-center">
+        <div className={"product-indiv-container px-6 py-8 w-auto"}>
             <img className="product-img" src={product.imageURL}></img>
-                <div className="pl-3">
+                <div className="pt-4">
                     
-                    <h4>{product.name}</h4>
-                    <h6>{product.price}</h6>
-                    <h6>{product.discountedPrice}</h6>
+                    <h4 className="f-h4-400">{product.name}</h4>
+                    <h6 className="f-h6-400 line-through">{product.price}</h6>
+                    <h6 className="f-h6-700">{product.discountedPrice}</h6>
                 </div>
 
-            </div>
 
         </div>
     )
