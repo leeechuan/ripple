@@ -45,7 +45,6 @@ img.summer-bg{
 }
 
 .product-img{
-
     width: 400px;
 }
 
@@ -54,3 +53,12 @@ img.summer-bg{
         width: 500px
     }
 }
+
+.product-img:hover{
+    opacity: 0.5;
+    filter: grayscale(20%)
+}
+
+/* .product-img:not(:hover) + .product-description{
+    display: none;
+} */
