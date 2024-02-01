@@ -255,8 +255,8 @@ const UserDetail = () => {
                 <div>
 
                 <div className='userdetail-page'>
-                    <div className="min-h-screen bg-gray-100">
-                        <div className="max-w-3xl mx-auto mt-8 p-8 bg-white shadow-md rounded-md">
+                    <div className="min-h-screen ">
+                        <div className="mt-8 p-8 bg-white shadow-md rounded-md">
                             <h1 className="text-2xl font-semibold mb-4">User Details</h1>
                             {isEditMode ? (
                                 <div>
