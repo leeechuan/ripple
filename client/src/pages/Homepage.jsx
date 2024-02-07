@@ -8,7 +8,7 @@ import influencer1 from "../assets/fitness-influencer1.png"
 import influencer2 from "../assets/fitness-influencer2.png"
 import influencer3 from "../assets/fitness-influencer3.png"
 import promotionalbg from "../assets/promotional-bg.png"
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Testimonial from "../components/testimonial.jsx"
 import Accordion from "../components/accordion.jsx";
 import PriceTable from "../components/pricetable.jsx";
@@ -79,11 +79,13 @@ function Homepage(){
 
     
     // For Redirection to Login
-    const [goToLogin, setGoToLogin] = React.useState(false)
+    const navigate = useNavigate();
 
-    if(goToLogin) {
-        return <Navigate to="/login"></Navigate>;
-    }
+    // const [goToLogin, setGoToLogin] = React.useState(false)
+
+    // if(goToLogin) {
+    //     return <Navigate to="/login"></Navigate>;
+    // }
 
 
     
@@ -103,7 +105,7 @@ function Homepage(){
                 <span className="ripple-title-logo self-center font-semibold whitespace-nowrap dark:text-white">RIPPLE</span>
             </a>
             <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <button type="button" onClick={()=> {setGoToLogin(true)}}  className="btn-primary text-white font-medium rounded-lg text-sm px-4 py-2 text-center ">Login</button>
+                <button type="button" onClick={() => navigate("/login")}  className="btn-primary text-white font-medium rounded-lg text-sm px-4 py-2 text-center ">Login</button>
                 <button onClick={toggleMenuVisibility} data-collapse-toggle="navbar-sticky" type="button" className="z-50 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-600">
                     <span className="sr-only">Open main menu</span>
                     <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -185,7 +187,7 @@ function Homepage(){
                         <h1 className="inline hero-title-highlight">LIMITS</h1>
                     </div>
                     <h3 className="hero-caption relative pb-8 z-30 text-white">SCULPT YOUR IDEAL, ONE REP AT A TIME</h3>
-                    <button href= "https://theripplegym.vercel.app/" className="btn-primary relative z-30 p-5 text-2xl text-white bg-green-400 bg-opacity-50 rounded-xl"> Get Started </button> 
+                    <button onClick={() => navigate("/signup")} href= "https://theripplegym.vercel.app/" className="btn-primary relative z-30 p-5 text-2xl text-white bg-green-400 bg-opacity-50 rounded-xl"> Get Started </button> 
                 </div>
                 
                 <video autoPlay loop muted playsInline className="absolute z-10 w-auto min-w-full min-h-full max-w-none" src= {ripplehomepage}> </video> 

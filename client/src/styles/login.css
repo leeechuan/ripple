@@ -1,4 +1,4 @@
-.login-page{
+.login-page, .signup-page{
   height: 100%;
   margin: 0;
   display: flex;
@@ -7,7 +7,8 @@
   overflow: hidden;
 }
 
-.login-page .spiral{
+.login-page .spiral,
+.signup-page .spiral{
   display: flex;
   align-items: center;
   gap: 10px;
@@ -38,12 +39,15 @@
 }
 
 
-.login-page .character{
+.login-page .character,
+.signup-page .character{
   color: var(--text-default);
   font-size: 4em;
   transform: translateY(calc(sin(var(--angle))*100px)) scale(calc(cos(var(--angle)) * 0.5 + 0.5));
   animation: spiral 4s linear infinite;
 }
+
+/* Login */
 
 .login-page .login-container{
   max-width: 30vw;
@@ -55,7 +59,7 @@
 }
 
 @media (max-width: 1024px) {
-  .login-page .login-container {
+  .login-page .login-container{
     max-width: 50vw;
     max-height: 428px;
     position: relative;
@@ -76,3 +80,45 @@
   }
 }
 
+/* SignUp */
+
+.signup-page .login-container{
+  max-width: 30vw;
+  max-height: 597px;
+  position: relative;
+  left: 35vw;
+  top: 16vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .signup-page .login-container {
+    max-width: 50vw;
+    max-height: 597px;
+    position: relative;
+    left: 25vw;
+    top: 16vh;
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
+@media (max-width: 640px) {
+  .signup-page .login-container {
+    max-width: 80vw;
+    max-height: 597px;
+    position: relative;
+    left: 10vw;
+    top: 16vh;
+    font-family: 'Quicksand', sans-serif;
+  }
+}
+
+.password-strength-meter .fa-check{
+  color: green;
+  margin-right: var(--space-xxs)
+}
+
+.password-strength-meter .fa-times{
+  color: red;
+  margin-right: var(--space-xxs)
+}
