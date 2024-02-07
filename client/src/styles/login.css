@@ -51,7 +51,7 @@
 
 .login-page .login-container{
   max-width: 30vw;
-  max-height: 428px;
+  max-height: 468px;
   position: relative;
   left: 35vw;
   top: 25vh;
@@ -61,7 +61,7 @@
 @media (max-width: 1024px) {
   .login-page .login-container{
     max-width: 50vw;
-    max-height: 428px;
+    max-height: 468px;
     position: relative;
     left: 25vw;
     top: 25vh;
@@ -72,7 +72,7 @@
 @media (max-width: 640px) {
   .login-page .login-container {
     max-width: 70vw;
-    max-height: 428px;
+    max-height: 468px;
     position: relative;
     left: 15vw;
     top: 25vh;
@@ -84,7 +84,7 @@
 
 .signup-page .login-container{
   max-width: 30vw;
-  max-height: 597px;
+  max-height: 629px;
   position: relative;
   left: 35vw;
   top: 16vh;
@@ -94,7 +94,7 @@
 @media (max-width: 1024px) {
   .signup-page .login-container {
     max-width: 50vw;
-    max-height: 597px;
+    max-height: 629px;
     position: relative;
     left: 25vw;
     top: 16vh;
@@ -105,7 +105,7 @@
 @media (max-width: 640px) {
   .signup-page .login-container {
     max-width: 80vw;
-    max-height: 597px;
+    max-height: 629px;
     position: relative;
     left: 10vw;
     top: 16vh;
