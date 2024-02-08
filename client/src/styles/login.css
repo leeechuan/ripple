@@ -1,4 +1,4 @@
-.login-page, .signup-page{
+.login-page, .signup-page, .forget-password-page, .reset-password-page{
   height: 100%;
   margin: 0;
   display: flex;
@@ -7,8 +7,7 @@
   overflow: hidden;
 }
 
-.login-page .spiral,
-.signup-page .spiral{
+.spiral{
   display: flex;
   align-items: center;
   gap: 10px;
@@ -39,8 +38,7 @@
 }
 
 
-.login-page .character,
-.signup-page .character{
+.character{
   color: var(--text-default);
   font-size: 4em;
   transform: translateY(calc(sin(var(--angle))*100px)) scale(calc(cos(var(--angle)) * 0.5 + 0.5));
@@ -61,22 +59,16 @@
 @media (max-width: 1024px) {
   .login-page .login-container{
     max-width: 50vw;
-    max-height: 468px;
-    position: relative;
     left: 25vw;
-    top: 25vh;
-    font-family: 'Quicksand', sans-serif;
+
   }
 }
 
 @media (max-width: 640px) {
   .login-page .login-container {
     max-width: 70vw;
-    max-height: 468px;
-    position: relative;
     left: 15vw;
-    top: 25vh;
-    font-family: 'Quicksand', sans-serif;
+
   }
 }
 
@@ -94,24 +86,73 @@
 @media (max-width: 1024px) {
   .signup-page .login-container {
     max-width: 50vw;
-    max-height: 629px;
-    position: relative;
     left: 25vw;
-    top: 16vh;
-    font-family: 'Quicksand', sans-serif;
+
   }
 }
 
 @media (max-width: 640px) {
   .signup-page .login-container {
     max-width: 80vw;
-    max-height: 629px;
-    position: relative;
     left: 10vw;
-    top: 16vh;
-    font-family: 'Quicksand', sans-serif;
+
   }
 }
+
+/* Forgot Password */
+
+.forgot-password-page .login-container{
+  max-width: 30vw;
+  /* max-height: 279px; */
+  position: relative;
+  left: 35vw;
+  top: 32vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .forgot-password-page .login-container {
+    max-width: 50vw;
+    left: 25vw;
+
+  }
+}
+
+@media (max-width: 640px) {
+  .forgot-password-page .login-container {
+    max-width: 80vw;
+    left: 10vw;
+
+  }
+}
+
+/* Reset Password */
+
+.reset-password-page .login-container{
+  max-width: 30vw;
+  max-height: 506px;
+  position: relative;
+  left: 35vw;
+  top: 20vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .reset-password-page .login-container {
+    max-width: 50vw;
+    left: 25vw;
+
+  }
+}
+
+@media (max-width: 640px) {
+  .reset-password-page .login-container {
+    max-width: 80vw;
+    left: 10vw;
+
+  }
+}
+
 
 .password-strength-meter .fa-check{
   color: green;

@@ -1,6 +1,7 @@
 const User = require('../models/userModel')
 const mongoose = require ('mongoose')
 const jwt = require('jsonwebtoken')
+const nodemailer = require("nodemailer");
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d' })
@@ -129,6 +130,91 @@ const updateUserDetail = async (req, res) => {
     // res.status(200).json(user)
 
 
+//Forgot Password
+
+const forgotPassword = async (req, res) => {
+    try {
+        const isProduction = process.env.NODE_ENV === 'production'
+        const {email} = req.body
+
+        User.findOne({email:email})
+        .then (user => {
+            if(!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            const token = jwt.sign({id: user._id}, "jwt_secret_key_ripple", {expiresIn: "1d"})
+
+            const transporter = nodemailer.createTransport({
+                // host: "Gmail",
+                // port: 465,
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                // secure: true,
+                auth: {
+                  // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+                  user: "lccodingprojects@gmail.com",
+                  pass: "neqq vonv zxxe csoz",
+                },
+                tls: {
+                    ciphers: 'SSLv3'
+                }
+              });
+              
+              const info = {
+                from: '"The Ripple Gym" <admin-donotreply@ripple.com>', // sender address
+                to: "aleechuan@gmail.com",
+                subject: "Reset Password Link", // Subject line
+                text: "this is a test message", // plain text body
+                html: `<b>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</b>`, // html body
+              };
+
+
+              transporter.sendMail(info, function(error,info){
+                if(error) { 
+                    console.log(error)
+                    return res.status(500).json({ error: 'Internal server error' });
+                } else { 
+                    user.resetPasswordToken = token;
+                    user.save()
+                    return res.status(200).json({ status: 'Success' });
+                }
+              })
+        })
+
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+const verifyLink = async (req, res) => {
+    const resetPasswordToken = req.body.token; // Extracted from reset password link
+    // const { userId, isExpired, error } = verifyLink(resetPasswordToken);
+    console.log (resetPasswordToken)
+
+    try {
+        const decoded = jwt.verify(resetPasswordToken, "jwt_secret_key_ripple");
+        const { id, exp } = decoded;
+
+        // Check if token has expired
+        const isExpired = Date.now() >= exp * 1000;
+
+        console.log("User ID:", id);
+        console.log("Is expired:", isExpired);
+
+        if (isExpired) {
+            return res.status(400).json({ error: 'Token has expired' });
+        }
+
+        return res.status(200).json({ userId: id, isExpired });
+    } catch (error) {
+        // JWT verification failed (e.g., invalid token)
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
+
+
 
 
 
@@ -137,6 +223,8 @@ module.exports = {
     loginUser,
     signupUser,
     getUserDetail,
-    updateUserDetail
+    updateUserDetail,
+    forgotPassword,
+    verifyLink
 }
 

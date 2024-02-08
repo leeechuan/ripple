@@ -332,6 +332,19 @@ h6{
   font-weight: 500;
 }
 
+.layout-v1 input.success{
+  border: 1px solid var(--secondary-400)
+}
+
+.layout-v1 div.success{
+  border: 2px solid var(--secondary-500);
+  text-align: center;
+  padding: 4px;
+  background-color: var(--secondary-100);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
 .layout-v1 .label-container {
   display: block;
   color: var(--text-600);
