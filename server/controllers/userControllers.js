@@ -154,7 +154,7 @@ const forgotPassword = async (req, res) => {
                 auth: {
                   // TODO: replace `user` and `pass` values from <https://forwardemail.net>
                   user: "lccodingprojects@gmail.com",
-                  pass: "neqq vonv zxxe csoz",
+                  pass: process.env.SMTP_PASSWORD,
                 },
                 tls: {
                     ciphers: 'SSLv3'
