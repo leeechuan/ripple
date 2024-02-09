@@ -218,6 +218,14 @@ h6{
     background: var(--secondary-300);
   }
 
+.layout-v1 button.disabled{
+    background: var(--background-500);
+  }
+
+.layout-v1 button.disabled:hover{
+    background: var(--background-300);
+  }
+
 .layout-v1 .input-outline{
   outline-color: var(--primary-default);
 }

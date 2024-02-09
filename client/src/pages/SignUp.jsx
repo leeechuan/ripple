@@ -75,7 +75,13 @@ function SignUp(){
                     <div className="flex items-start">
                     </div>
                 </div> */}
-                <button disabled = {isLoading} type="submit" className="w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign up</button>
+                <button 
+                disabled = {isLoading} 
+                type="submit" 
+                className={`w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 
+                focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 
+                py-2.5 text-center " ${isLoading ? 'disabled cursor-not-allowed' : ''} `}
+                >Sign up</button>
 
                 {error && <div className="error"> {error} </div>}
             </form>
