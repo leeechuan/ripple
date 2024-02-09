@@ -16,7 +16,7 @@ const app = express()
 app.use(cors(
     {
         origin: ["https://theripplegym.vercel.app","http://localhost:5173"],
-        methods: ["POST", "GET", "DELETE", "PATCH"],
+        methods: ["POST", "GET", "DELETE", "PATCH", "OPTIONS"],
         credentials: true
     }
 ))
