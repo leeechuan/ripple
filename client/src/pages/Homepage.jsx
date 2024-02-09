@@ -88,14 +88,12 @@ function Homepage(){
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
     const [email, setEmail] = useState('');
+    const [isLoading, setIsLoading] = useState(false)
 
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        console.log(name, number, email)
-
-        // await contactus(name, number, email);
+        setIsLoading(true)
 
 
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/contact`, {
@@ -106,12 +104,14 @@ function Homepage(){
 
 
         if (!response.ok){
+            setIsLoading(false)
             const data = await response.json();
             alert(data.error || 'Failed to submit form');
 
         }
 
         if(response.ok){
+            setistloading(false)
             setName('');
             setNumber('');
             setEmail('');
@@ -352,7 +352,12 @@ function Homepage(){
                     </form>
 
 
-                    <button onClick={handleSubmit} type="submit" className="mt-8 w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Contact Me!</button>
+                    <button onClick={handleSubmit} 
+                    type="submit" 
+                    className={`mt-8 w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 
+                    focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm 
+                    px-5 py-2.5 text-center "  ${isLoading ? 'disabled cursor-not-allowed' : ''} `}
+                    >Contact Me!</button>
                     
             </div>
 
