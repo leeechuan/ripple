@@ -20,7 +20,7 @@ function Login(){
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        
         await login(email, password)
     }
 
@@ -49,10 +49,7 @@ function Login(){
                 <div id="spiral2" className="spiral"></div>
             </div>
 
-            {/* <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img className="w-8 h-8 mr-2" src="" alt="logo">Flowbite</img>          
-                </a> */}
+
             <div className="login-container secondary-default-20 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h2 className="font-bold text-center f-h2-title text-default">
@@ -76,7 +73,12 @@ function Login(){
                     </div>
                     <a onClick={() => navigate("/forgotpassword")} href="#" className="f-h6-400 text-default text-primary-600 hover:underline">Forgot password?</a>
                 </div>
-                <button disabled={isLoading} type="submit" className="w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                <button 
+                disabled={isLoading} 
+                type="submit" 
+                className={`w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 
+                focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 
+                py-2.5 text-center " ${isLoading ? 'disabled cursor-not-allowed' : ''} `}>Sign In</button>
                 <p className="f-h6-400 text-default text-center">
                       {"Don't have an account with us? "}
                     <a onClick={() => navigate("/signup")} className="font-medium text-primary-600 underline cursor-pointer">Sign up</a>

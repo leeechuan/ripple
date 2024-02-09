@@ -6,10 +6,10 @@ export const useLogin = () => {
     const [isLoading, setIsLoading] = useState(null)
     const { dispatch } = useAuthContext()
 
+
     const login = async (email, password) => {
         setIsLoading(true)
         setError(null)
-
 
 
         const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users/login`, {
