@@ -196,10 +196,19 @@ const forgotPassword = async (req, res) => {
               
               const info = {
                 from: '"The Ripple Gym" <admin-donotreply@ripple.com>', // sender address
-                to: "aleechuan@gmail.com",
+                to: ["aleechuan@gmail.com" , email ],
                 subject: "Reset Password Link", // Subject line
-                text: "this is a test message", // plain text body
-                html: `<b>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</b>`, // html body
+                text: "You've requested to reset your password. Please copy and paste the following link into your browser to reset your password:", // plain text body
+                html:     
+                `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+                <h2 style="color: #333333;">Reset Your Password</h2>
+                <p style="color: #666666;">Dear User,</p>
+                <p style="color: #666666;">You've requested to reset your password. Please click the link below to reset your password:</p>
+                <p>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</p>
+                <p style="color: #666666;">If you did not request this change, please ignore this email. The link will expire in 1 hour.</p>
+                <p style="color: #666666;">Regards,<br>The Ripple Gym</p>
+                 </div>`
+                // html: `<b>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</b>`, // html body
               };
 
 
