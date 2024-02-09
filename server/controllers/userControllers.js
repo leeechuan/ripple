@@ -2,7 +2,8 @@ const User = require('../models/userModel')
 const mongoose = require ('mongoose')
 const jwt = require('jsonwebtoken')
 const nodemailer = require("nodemailer");
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d' })
