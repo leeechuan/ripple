@@ -5,6 +5,7 @@ const {
     signupUser,
     forgotPassword,
     verifyLink,
+    updatePassword
 } = require('../controllers/userControllers')
 
 const router = express.Router()
@@ -21,6 +22,9 @@ router.post('/forgotpassword', forgotPassword)
 
 // VERIFY link
 router.post('/verifylink', verifyLink)
+
+// UPDATE password
+router.post('/updatepassword', updatePassword)
 
 
 module.exports = router

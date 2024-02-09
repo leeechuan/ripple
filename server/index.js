@@ -7,6 +7,7 @@ const userRoutes = require('./routes/users.js')
 const userdetailRoutes = require('./routes/userdetail.js')
 const archiveRoutes = require('./routes/archive.js')
 const productRoutes = require('./routes/products.js')
+const contactRoutes = require('./routes/contact.js')
 
 
 // Express app
@@ -47,6 +48,7 @@ app.use('/api/users', userRoutes)
 app.use('/api/users', userdetailRoutes)
 app.use('/api/archive', archiveRoutes)
 app.use('/api/products', productRoutes)
+app.use('/api/contact', contactRoutes)
 
 // // Connect to DB
 

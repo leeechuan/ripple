@@ -5,11 +5,20 @@ import { useSignup } from "../hooks/useSignup.js";
 import { useParams } from 'react-router-dom';
 import PasswordStrengthMeter from "../components/passwordmeter.jsx";
 import { useVerifyLink } from "../hooks/useVerifyLink.js";
+import { useNavigate } from "react-router-dom";
+import { useUpdatePassword } from "../hooks/useUpdatePassword.js";
 
 function ResetPassword(){
 
     const { token } = useParams(); // Extract the token from the URL parameters
     const { verifylink } = useVerifyLink(); // Use the custom hook to get the verifylink function
+    const { updatepassword } = useUpdatePassword() // Use the custom hook to get the updatepassword function
+    const [userId ,setUserId] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const {signup, resError, isLoading} = useVerifyLink()
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -22,6 +31,15 @@ function ResetPassword(){
                 const verificationResult = await verifylink(token);
                 console.log('Verification result:', verificationResult);
                 // Proceed based on the verification result (e.g., show success message, redirect to reset password page)
+                console.log()
+                if (error || !verificationResult ) {
+                    // Navigate to invalid page
+                    navigate('/invalidlink');
+                }
+
+                setUserId(verificationResult.userId)
+
+
             } catch (error) {
                 // Handle errors from the verification function (e.g., network error, invalid token)
                 console.error('Error verifying reset password link:', error);
@@ -30,25 +48,38 @@ function ResetPassword(){
         }
 
         verifyLinkAndProceed(); // Call the function when the component mounts
-    });
+
+    }, []);
 
 
 
 
-    const [email ,setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const {signup, error, isLoading} = useSignup()
+    // const [email ,setEmail] = useState('')
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         // Check if password and confirm password match
         if (password !== confirmPassword) {
-            alert("Passwords don't match!");
+            setError("Passwords don't match!");
             return;
         }
 
-        await signup(email, password)
+    // Call the update password function
+    try {
+        await updatepassword(userId, password);
+        
+        // If update password is successful, redirect to the login screen
+        alert("Password Successfully Changed")
+        navigate('/login');
+
+    } catch (error) {
+        console.error('Password update error:', error);
+        // Handle error (e.g., display error message)
+    }
+
+
+        
     }
 
 
