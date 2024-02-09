@@ -32,9 +32,11 @@ const PopupModal = ({ isOpen, closeModal }) => {
                         Thank you for checking out my project!
                     </p>
                     <p className="text-base leading-relaxed text-gray-500">
-                        This project was created on a MERN stack (MongoDB, Express, React and Node.js), is self-designed and is responsive!
-                        
+                        This project was created on a MERN stack (MongoDB, Express, React and Node.js), is self-designed and is responsive!                      
                     </p>
+                    <p className="text-base leading-relaxed text-gray-500">
+                        Please use an email address that you are able to access if you wish to try out features with email functionalities.
+                        </p>
                 </div>
                 {/* <!-- Modal footer --> */}
                 <div className="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
