@@ -49,7 +49,7 @@
 
 .login-page .login-container{
   max-width: 30vw;
-  max-height: 468px;
+  /* max-height: 468px; */
   position: relative;
   left: 35vw;
   top: 25vh;
@@ -76,7 +76,7 @@
 
 .signup-page .login-container{
   max-width: 30vw;
-  max-height: 629px;
+  /* max-height: 629px; */
   position: relative;
   left: 35vw;
   top: 16vh;
@@ -130,7 +130,7 @@
 
 .reset-password-page .login-container{
   max-width: 30vw;
-  max-height: 506px;
+  /* max-height: 506px; */
   position: relative;
   left: 35vw;
   top: 20vh;
@@ -147,6 +147,33 @@
 
 @media (max-width: 640px) {
   .reset-password-page .login-container {
+    max-width: 80vw;
+    left: 10vw;
+
+  }
+}
+
+/* Invalid Link */
+
+.invalid-page .login-container{
+  max-width: 60vw;
+  /* max-height: 506px; */
+  position: relative;
+  left: 20vw;
+  top: 20vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
+@media (max-width: 1024px) {
+  .invalid-page .login-container {
+    max-width: 70vw;
+    left: 15vw;
+
+  }
+}
+
+@media (max-width: 640px) {
+  .invalid-page .login-container {
     max-width: 80vw;
     left: 10vw;
 

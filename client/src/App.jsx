@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { useAuthContext } from './hooks/useAuthContext'
 import WorkoutArchive from './pages/WorkoutArchive'
 import ProductListing from './pages/ProductListingPage'
-
+import InvalidPage from './pages/InvalidPage'
 
 
 
@@ -24,6 +24,7 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<Homepage />}></Route>
+            <Route path="/invalidlink" element={<InvalidPage />}></Route>
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/workout"></Navigate>}></Route>
             <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/workout"></Navigate>}></Route>
             <Route path="/forgotpassword" element={!user ? <ForgotPassword /> : <Navigate to="/workout"></Navigate>}></Route>

@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const mongoose = require ('mongoose')
 const jwt = require('jsonwebtoken')
 const nodemailer = require("nodemailer");
+const bcrypt = require('bcrypt')
 
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d' })
@@ -112,7 +113,37 @@ const updateUserDetail = async (req, res) => {
             // token: createToken(updatedUser._id)
         });
     } else {
-        res.statue(404);
+        res.status(404);
+        throw new Error("User not found")
+    }
+
+
+}
+
+
+//UPDATE a user password
+const updatePassword = async (req, res) => {
+
+    const user = await User.findById(req.body.userId);
+
+    console.log(user, "---user")
+    console.log(req.body.userId, "---req.userId")
+
+    if(user){
+        // Hash the new password before saving
+        const salt = await bcrypt.genSalt(10)
+        const hash = await bcrypt.hash(req.body.password,salt)
+        // const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        user.password = hash;
+
+        const updatedUser = await user.save({ email: user.email , password: hash })
+
+        res.json({
+            _id: updatedUser._id,
+        });
+    } else {
+
+        res.status(404);
         throw new Error("User not found")
     }
 
@@ -142,7 +173,7 @@ const forgotPassword = async (req, res) => {
             if(!user) {
                 return res.status(404).json({ error: 'User not found' });
             }
-            const token = jwt.sign({id: user._id}, "jwt_secret_key_ripple", {expiresIn: "1d"})
+            const token = jwt.sign({id: user._id}, "jwt_secret_key_ripple", {expiresIn: "1h"})
 
             const transporter = nodemailer.createTransport({
                 // host: "Gmail",
@@ -187,6 +218,9 @@ const forgotPassword = async (req, res) => {
     }
 }
 
+
+// VerifyLink
+
 const verifyLink = async (req, res) => {
     const resetPasswordToken = req.body.token; // Extracted from reset password link
     // const { userId, isExpired, error } = verifyLink(resetPasswordToken);
@@ -225,6 +259,7 @@ module.exports = {
     getUserDetail,
     updateUserDetail,
     forgotPassword,
-    verifyLink
+    verifyLink,
+    updatePassword
 }
 

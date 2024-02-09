@@ -16,7 +16,6 @@ import PopupModal from "../components/modal-homepage.jsx";
 import Animation from "../scripts/annimation.js";
 
 
-
 function Homepage(){
 
 
@@ -81,12 +80,46 @@ function Homepage(){
     // For Redirection to Login
     const navigate = useNavigate();
 
-    // const [goToLogin, setGoToLogin] = React.useState(false)
 
-    // if(goToLogin) {
-    //     return <Navigate to="/login"></Navigate>;
-    // }
 
+
+    
+    // State variables to store form data
+    const [name, setName] = useState('');
+    const [number, setNumber] = useState('');
+    const [email, setEmail] = useState('');
+
+    // Function to handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        console.log(name, number, email)
+
+        // await contactus(name, number, email);
+
+
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/contact`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, name, number})
+        })
+
+
+        if (!response.ok){
+            const data = await response.json();
+            alert(data.error || 'Failed to submit form');
+
+        }
+
+        if(response.ok){
+            setName('');
+            setNumber('');
+            setEmail('');
+            alert('Thank you for contacting us!');
+
+        }
+    }
+ 
 
     
 
@@ -201,7 +234,23 @@ function Homepage(){
                     <div className="about-us-text w-1/2 text-right px-8 text-default hide-right">
                         <h2 className="f-h2-700">THERE IS A NEW GYM IN TOWN</h2>
                         <h5 className="f-h5-700 pt-8">{"Welcome to our fitness haven, where passion meets purpose. We're not just a gym. We're a community committed to sculpting healthier lives. With state-of-the-art facilities, expert trainers, and a supportive environment, we inspire individuals to embrace their fitness journey and achieve their wellness goals."}</h5>
-                        <h5 className="f-h5-700 pt-5 underline">Find out more</h5>
+                        
+                        <div className="pt-5">                        
+                        <Link
+                        className="f-h5-700 underline"
+                        activeClass="active"
+                        to="promotional-section"
+                        spy={true}
+                        smooth={true}
+                        offset={-100}
+                        duration={500}
+                        style={{ cursor: 'pointer' }}
+                        >
+                            Find out more
+                        </Link>       
+                        
+                        </div>
+                 
                     </div>
                 </div>
                 
@@ -288,22 +337,22 @@ function Homepage(){
                     <form className="space-y-4 md:space-y-6" action="#">
                     <div>
                         <label htmlFor="name" className="block mb-2 f-label text-default">How do we address you?</label>
-                        <input type="name" name="name" id="name" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" placeholder="e.g John Doe" required=""></input>
+                        <input onChange={(e) => setName(e.target.value)} value={name} type="name" name="name" id="name" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" placeholder="e.g John Doe" required=""></input>
                     </div>
 
 
                     <div>
                         <label htmlFor="number" className="block mb-2 f-label text-default">Contact Number</label>
-                        <input type="number" name="number" id="number" placeholder="e.g 8209 8372" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" required=""></input>
+                        <input onChange={(e) => setNumber(e.target.value)} value={number} type="number" name="number" id="number" placeholder="e.g 8209 8372" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" required=""></input>
                     </div>
                     <div>
                         <label htmlFor="email" className="block mb-2 f-label text-default">Email</label>
-                        <input type="email" name="email" id="email" placeholder="e.g ripplegym@ymail.com" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" required=""></input>
+                        <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" name="email" id="email" placeholder="e.g ripplegym@ymail.com" className="input-outline focus:outline-none focus:ring-0 border f-label rounded-lg block w-full p-2.5" required=""></input>
                     </div>
                     </form>
 
 
-                    <button type="submit" className="mt-8 w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Contact Me!</button>
+                    <button onClick={handleSubmit} type="submit" className="mt-8 w-full btn-primary text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Contact Me!</button>
                     
             </div>
 
