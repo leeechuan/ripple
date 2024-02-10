@@ -223,7 +223,7 @@ h6{
   }
 
 .layout-v1 button.disabled:hover{
-    background: var(--background-300);
+    background: var(--background-500);
   }
 
 .layout-v1 .input-outline{
