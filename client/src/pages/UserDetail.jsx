@@ -192,8 +192,12 @@ const UserDetail = () => {
       settLastName(lastname)
       settGender(gender)
       settEmail(email)
-      const[day, month, year] = dateofbirth.split('/').map(Number)
-      settDateOfBirth(new Date(year, month-1, day))
+      if (dateofbirth) {
+        const [day, month, year] = dateofbirth.split('/').map(Number)
+        settDateOfBirth(new Date(year, month - 1, day))
+      }
+    //   const[day, month, year] = dateofbirth.split('/').map(Number)
+    //   settDateOfBirth(new Date(year, month-1, day))
       settNationality(nationality)
       settEmergencyContactName(emergencycontactname)
       settEmergencyContactNumber(emergencycontactnumber)
