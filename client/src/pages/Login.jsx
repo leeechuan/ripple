@@ -12,7 +12,7 @@ function Login(){
         //Precautionary check to prevent js from running unnecessarily on other pages
         if (window.location.pathname === '/login')
         LoginSpiral();
-    })
+    },[])
 
     const [email ,setEmail] = useState('')
     const [password, setPassword] = useState('')
