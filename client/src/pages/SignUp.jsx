@@ -8,7 +8,7 @@ function SignUp(){
 
     useEffect(() => {
         //Precautionary check to prevent js from running unnecessarily on other pages
-        if (window.location.pathname === '/signup1')
+        if (window.location.pathname === '/signup')
         LoginSpiral();
     })
 
