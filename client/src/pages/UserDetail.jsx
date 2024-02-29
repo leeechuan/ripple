@@ -68,122 +68,123 @@ const UserDetail = () => {
     const [emptyFields, setEmptyFields] = useState([]);
     const [isEditMode, setIsEditMode] = useState(false);
 
+    // useEffect(() => {
+    //     const fetchUser = async () => {
+    //         try {
+    //             const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
+    //                 headers: {
+    //                     'Authorization': `Bearer ${user.token}`
+    //                 }
+    //             });
+    
+    //             if (response.ok) {
+    //                 const json = await response.json();
+    //                 userDispatch({ type: 'GET_USER', payload: json });
+    
+    //                 // Update States
+    //                 setFirstName(json[0].firstname);
+    //                 setLastName(json[0].lastname);
+    //                 setGender(json[0].gender);
+    //                 setEmail(json[0].email);
+    //                 setNationality(json[0].nationality);
+    //                 setEmergencyContactName(json[0].emergencycontactname);
+    //                 setEmergencyContactNumber(json[0].emergencycontactnumber);
+    //                 setMobileNumber(json[0].mobilenumber);
+    //                 setHomeNumber(json[0].homenumber);
+    //                 setGoals({
+    //                     calories: json[0]?.goals?.calories || 0,
+    //                     distance: json[0]?.goals?.distance || 0,
+    //                     duration: json[0]?.goals?.duration || 0
+    //                 });
+    
+    //                 if (json[0].dateofbirth) {
+    //                     const [day, month, year] = json[0].dateofbirth.split('/').map(Number);
+    //                     setDateOfBirth(new Date(year, month - 1, day));
+    //                     settDateOfBirth(new Date(year, month - 1, day));
+    //                 }
+    
+    //                 setIsLoading(false);
+    //             } else {
+    //                 console.error('Error fetching user:', response.statusText);
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching user:', error);
+    //         }
+    //     };
+    
+    //     if (user) {
+    //         fetchUser();
+    //     }
+    // }, [user, userDispatch]);
+  
     useEffect(() => {
-        const fetchUser = async () => {
-          try {
-            const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
-              headers: {
-                'Authorization': `Bearer ${user.token}`
-              }
-            });
-      
-            if (response.ok) {
-              const json = await response.json();
-              userDispatch({ type: 'GET_USER', payload: json });
-              updateStateFromJson(json);
-              setIsLoading(false);
-            } else {
-              console.error('Error fetching user:', response.statusText);
+      const fetchUser = async () => {
+        try {
+          const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
             }
-          } catch (error) {
-            console.error('Error fetching user:', error);
+          });
+  
+          if (response.ok) {
+            const json = await response.json();
+            userDispatch({ type: 'GET_USER', payload: json });
+
+
+            //Update States
+            setFirstName(json[0].firstname)
+            setLastName(json[0].lastname)
+            setGender(json[0].gender)
+            setEmail(json[0].email)
+
+            if (json[0].dateofbirth) {
+            const[day, month, year] = json[0].dateofbirth.split('/').map(Number)
+            setDateOfBirth(json[0].dateofbirth)
+            settDateOfBirth(new Date(year, month-1, day))
+            }
+            setNationality(json[0].nationality)
+            setEmergencyContactName(json[0].emergencycontactname)
+            setEmergencyContactNumber(json[0].emergencycontactnumber)
+            setMobileNumber(json[0].mobilenumber)
+            setHomeNumber(json[0].homenumber)
+            setGoals({
+              calories: json[0]?.goals?.calories || 0,
+              distance: json[0]?.goals?.distance || 0,
+              duration: json[0]?.goals?.duration || 0
+            })
+
+            settFirstName(json[0].firstname)
+            settLastName(json[0].lastname)
+            settGender(json[0].gender)
+            settEmail(json[0].email)
+            
+            
+            settNationality(json[0].nationality)
+            settEmergencyContactName(json[0].emergencycontactname)
+            settEmergencyContactNumber(json[0].emergencycontactnumber)
+            settMobileNumber(json[0].mobilenumber)
+            settHomeNumber(json[0].homenumber)
+            settGoals({
+              calories: json[0]?.goals?.calories || 0,
+              distance: json[0]?.goals?.distance || 0,
+              duration: json[0]?.goals?.duration || 0
+            })
+
+            setIsLoading(false)
+
+
+          } else {
+            console.error('Error fetching user:', response.statusText);
           }
-        };
-      
-        if (user) {
-          fetchUser();
+        } catch (error) {
+          console.error('Error fetching user:', error);
         }
-      }, [user, userDispatch]);
-      
-      const updateStateFromJson = (json) => {
-        setFirstName(json[0].firstname);
-        setLastName(json[0].lastname);
-        setGender(json[0].gender);
-        setEmail(json[0].email);
-        
-        // Check if dateofbirth exists before splitting
-        if (json[0].dateofbirth) {
-          const [day, month, year] = json[0].dateofbirth.split('/').map(Number);
-          setDateOfBirth(new Date(year, month - 1, day));
-        }
-        
-        setNationality(json[0].nationality);
-        setEmergencyContactName(json[0].emergencycontactname);
-        setEmergencyContactNumber(json[0].emergencycontactnumber);
-        setMobileNumber(json[0].mobilenumber);
-        setHomeNumber(json[0].homenumber);
-        setGoals({
-          calories: json[0]?.goals?.calories || 0,
-          distance: json[0]?.goals?.distance || 0,
-          duration: json[0]?.goals?.duration || 0
-        });
       };
   
-    // useEffect(() => {
-    //   const fetchUser = async () => {
-    //     try {
-    //       const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/api/users`, {
-    //         headers: {
-    //           'Authorization': `Bearer ${user.token}`
-    //         }
-    //       });
-  
-    //       if (response.ok) {
-    //         const json = await response.json();
-    //         userDispatch({ type: 'GET_USER', payload: json });
-
-
-    //         //Update States
-    //         setFirstName(json[0].firstname)
-    //         setLastName(json[0].lastname)
-    //         setGender(json[0].gender)
-    //         setEmail(json[0].email)
-
-    //         const[day, month, year] = json[0].dateofbirth.split('/').map(Number)
-    //         setDateOfBirth(json[0].dateofbirth)
-    //         setNationality(json[0].nationality)
-    //         setEmergencyContactName(json[0].emergencycontactname)
-    //         setEmergencyContactNumber(json[0].emergencycontactnumber)
-    //         setMobileNumber(json[0].mobilenumber)
-    //         setHomeNumber(json[0].homenumber)
-    //         setGoals({
-    //           calories: json[0]?.goals?.calories || 0,
-    //           distance: json[0]?.goals?.distance || 0,
-    //           duration: json[0]?.goals?.duration || 0
-    //         })
-
-    //         settFirstName(json[0].firstname)
-    //         settLastName(json[0].lastname)
-    //         settGender(json[0].gender)
-    //         settEmail(json[0].email)
-            
-    //         settDateOfBirth(new Date(year, month-1, day))
-    //         settNationality(json[0].nationality)
-    //         settEmergencyContactName(json[0].emergencycontactname)
-    //         settEmergencyContactNumber(json[0].emergencycontactnumber)
-    //         settMobileNumber(json[0].mobilenumber)
-    //         settHomeNumber(json[0].homenumber)
-    //         settGoals({
-    //           calories: json[0]?.goals?.calories || 0,
-    //           distance: json[0]?.goals?.distance || 0,
-    //           duration: json[0]?.goals?.duration || 0
-    //         })
-
-    //         setIsLoading(false)
-
-
-    //       } else {
-    //         console.error('Error fetching user:', response.statusText);
-    //       }
-    //     } catch (error) {
-    //       console.error('Error fetching user:', error);
-    //     }
-    //   };
-  
-    //   if (user) {
-    //     fetchUser();
-    //   }
-    // }, [user, userDispatch]);
+      if (user) {
+        fetchUser();
+      }
+    }, [user, userDispatch]);
   
     const handleSubmit = async () => {
       if (!user) {
@@ -496,7 +497,7 @@ const UserDetail = () => {
                                         value={dateofbirth}>
                                         Date Of Birth
                                         </label>
-                                        <p className="text-md text-gray-800 font-bold">{dateofbirth}</p>
+                                        <p className="text-md text-gray-800 font-bold">{dateofbirth ? new Date(dateofbirth).toLocaleDateString() : 'N/A'}</p>
                                     </div>
                                     <div className="mb-4">
                                         <label className="label-container"
