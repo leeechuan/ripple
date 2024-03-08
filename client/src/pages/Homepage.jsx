@@ -111,7 +111,7 @@ function Homepage(){
         }
 
         if(response.ok){
-            setistloading(false)
+            setIsLoading(false)
             setName('');
             setNumber('');
             setEmail('');
