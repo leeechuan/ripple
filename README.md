@@ -43,6 +43,3 @@ npm install
 npm run dev
 # App runs on http://localhost:5173
 ```
-
----
-Built with ❤️ by [leeechuan](https://github.com/leeechuan)
