@@ -1,5 +1,4 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
 const workoutRoutes = require('./routes/workouts.js')
@@ -50,28 +49,10 @@ app.use('/api/archive', archiveRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/contact', contactRoutes)
 
-// // Connect to DB
-
-
-const dotenv = require('dotenv');
-dotenv.config();
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-// Use the appropriate MongoDB URI based on the environment
-const mongoURI = isProduction ? process.env.MONGO_URI_PROD : process.env.MONGO_URI;
-
-// Now use `mongoURI` to connect to the MongoDB database
-mongoose.connect(mongoURI)
-    .then(() => {
-        console.log('Connected to MongoDB');
-        app.listen(process.env.PORT, () => {
-            console.log('Server is running on port', process.env.PORT);
-        });
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
-    });
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log('Server is running on port', PORT);
+});
 
 
     app.get("/", (req, res) => {

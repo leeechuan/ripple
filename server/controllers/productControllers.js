@@ -1,33 +1,20 @@
-const Product = require('../models/productModel')
-const mongoose = require ('mongoose')
-
+// MOCKED DATABASE: Static product data
+const products = [
+    { _id: 'p1', name: 'Premium Gym Bag', price: 49.99, description: 'Durable and stylish gym bag.' },
+    { _id: 'p2', name: 'Weighted Jump Rope', price: 19.99, description: 'Perfect for cardio workouts.' },
+    { _id: 'p3', name: 'High-Density Yoga Mat', price: 29.99, description: 'Extra thick for comfort.' }
+];
 
 // //GET all products
-    const getProducts = async (req, res) => {
-    const user_id = req.user._id
-
-
-    try {
-        const products = await Product.find();
-
-        res.status(200).json(products);
-    } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
+const getProducts = async (req, res) => {
+    res.status(200).json(products);
 }
 
 
 //GET a single product
 const getProduct = async (req, res) => {
     const { id } = req.params
-
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such product'})
-        
-    }
-
-    const product = await Product.findById(id)
+    const product = products.find(p => p._id === id);
 
     if(!product){
         return res.status(404).json({error: 'No such product'})
