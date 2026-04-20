@@ -25,7 +25,8 @@ export const useForgotPassword = () => {
 
         if(response.ok){
             setIsLoading(false)
-            setError("Email has been sent!")
+            setError(json.message ? json.message + (json.resetLink ? "\n\nMocked Reset Link: " + json.resetLink : "") : "Email has been sent!")
+            alert(json.message ? json.message + (json.resetLink ? "\n\nMocked Reset Link: " + json.resetLink : "") : "Email has been sent!")
         }
     }
 

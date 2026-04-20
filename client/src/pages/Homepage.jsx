@@ -115,8 +115,8 @@ function Homepage(){
             setName('');
             setNumber('');
             setEmail('');
-            alert('Thank you for contacting us!');
-
+            const data = await response.json();
+            alert(data.message || 'Thank you for contacting us!');
         }
     }
  

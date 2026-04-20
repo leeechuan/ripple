@@ -14,10 +14,11 @@ const loginUser = async (req, res) => {
     const {email, password} = req.body
 
     try {
-        const user = await User.login(email, password)
-
-        //Create a token
-        const token = createToken(user._id)
+        // MOCKED AUTH: Bypass database check
+        // const user = await User.login(email, password)
+        // const token = createToken(user._id)
+        
+        const token = "mocked_jwt_token_12345"
 
         res.status(200).json({email, token})
     } catch (error) {
@@ -33,16 +34,16 @@ const signupUser = async (req, res) => {
     const {email, password} = req.body
 
     try {
-        const user = await User.signup(email, password)
-
-        //Create a token
-        const token = createToken(user._id)
+        // MOCKED AUTH: Bypass database check
+        // const user = await User.signup(email, password)
+        // const token = createToken(user._id)
+        
+        const token = "mocked_jwt_token_12345"
 
         res.status(200).json({email, token})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
-
 }
 
 //GET a single user detail
@@ -170,59 +171,14 @@ const forgotPassword = async (req, res) => {
         const isProduction = process.env.NODE_ENV === 'production'
         const {email} = req.body
 
-        User.findOne({email:email})
-        .then (user => {
-            if(!user) {
-                return res.status(404).json({ error: 'User not found' });
-            }
-            const token = jwt.sign({id: user._id}, "jwt_secret_key_ripple", {expiresIn: "1h"})
-
-            const transporter = nodemailer.createTransport({
-                // host: "Gmail",
-                // port: 465,
-                host: 'smtp.gmail.com',
-                port: 587,
-                secure: false, // true for 465, false for other ports
-                // secure: true,
-                auth: {
-                  // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-                  user: "lccodingprojects@gmail.com",
-                  pass: process.env.SMTP_PASSWORD,
-                },
-                tls: {
-                    ciphers: 'SSLv3'
-                }
-              });
-              
-              const info = {
-                from: '"The Ripple Gym" <admin-donotreply@ripple.com>', // sender address
-                to: ["aleechuan@gmail.com" , email ],
-                subject: "Reset Password Link", // Subject line
-                text: "You've requested to reset your password. Please copy and paste the following link into your browser to reset your password:", // plain text body
-                html:     
-                `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #333333;">Reset Your Password</h2>
-                <p style="color: #666666;">Dear User,</p>
-                <p style="color: #666666;">You've requested to reset your password. Please click the link below to reset your password:</p>
-                <p>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</p>
-                <p style="color: #666666;">If you did not request this change, please ignore this email. The link will expire in 1 hour.</p>
-                <p style="color: #666666;">Regards,<br>The Ripple Gym</p>
-                 </div>`
-                // html: `<b>${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}</b>`, // html body
-              };
-
-
-              transporter.sendMail(info, function(error,info){
-                if(error) { 
-                    console.log(error)
-                    return res.status(500).json({ error: 'Internal server error' });
-                } else { 
-                    user.resetPasswordToken = token;
-                    user.save()
-                    return res.status(200).json({ status: 'Success' });
-                }
-              })
-        })
+        // MOCKED EMAIL: Bypass database and email service
+        const token = "mocked_reset_token"
+        
+        return res.status(200).json({ 
+            status: 'Success', 
+            message: `The email feature has been disabled as the site is no longer maintained.`,
+            resetLink: `${isProduction ? "https://theripplegym.vercel.app" : "http://localhost:5173"}/resetpassword/${token}`
+        });
 
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -234,24 +190,13 @@ const forgotPassword = async (req, res) => {
 
 const verifyLink = async (req, res) => {
     const resetPasswordToken = req.body.token; // Extracted from reset password link
-    // const { userId, isExpired, error } = verifyLink(resetPasswordToken);
-    console.log (resetPasswordToken)
 
     try {
-        const decoded = jwt.verify(resetPasswordToken, "jwt_secret_key_ripple");
-        const { id, exp } = decoded;
-
+        // MOCKED VERIFY LINK: Bypass JWT
         // Check if token has expired
-        const isExpired = Date.now() >= exp * 1000;
+        const isExpired = false;
 
-        console.log("User ID:", id);
-        console.log("Is expired:", isExpired);
-
-        if (isExpired) {
-            return res.status(400).json({ error: 'Token has expired' });
-        }
-
-        return res.status(200).json({ userId: id, isExpired });
+        return res.status(200).json({ userId: "mocked_user_id", isExpired });
     } catch (error) {
         // JWT verification failed (e.g., invalid token)
         return res.status(500).json({ error: 'Internal server error' });
